@@ -15,7 +15,15 @@
       <mobile-menu></mobile-menu>
       <template slot="links">
         <sidebar-item
-          :link="{ name: 'Dashboard', icon: 'event', path: '/dashboard' }"
+          :link="{ name: 'Dashboard', icon: 'assessment', path: '/dashboard' }"
+        >
+        </sidebar-item>
+        <sidebar-item
+          :link="{ name: 'Blog', icon: 'library_books', path: '/blog' }"
+        >
+        </sidebar-item>
+        <sidebar-item
+          :link="{ name: 'Artists', icon: 'mic', path: '/artists' }"
         >
         </sidebar-item>
       </template>

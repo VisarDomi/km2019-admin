@@ -8,18 +8,16 @@
   >
     <div class="logo">
       <a
-        href="https://www.creative-tim.com"
+        href="#"
         class="simple-text logo-mini"
-        target="_blank"
       >
         <div class="logo-img">
           <img :src="logo" />
         </div>
       </a>
       <a
-        href="https://www.creative-tim.com"
+        href="#"
         class="simple-text logo-normal"
-        target="_blank"
       >
         <template v-if="$route.meta.rtlActive">{{ rtlTitle }}</template>
         <template v-else>{{ title }}</template>
@@ -67,7 +65,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Orange Limo"
+      default: "Kenga Magjike"
     },
     rtlTitle: {
       type: String,
@@ -103,7 +101,7 @@ export default {
     },
     logo: {
       type: String,
-      default: "./img/orange_placeholder.png"
+      default: "./trophy.png"
     },
     sidebarLinks: {
       type: Array,

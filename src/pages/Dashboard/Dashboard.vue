@@ -4,9 +4,9 @@
       <stats-card header-color="blue">
         <template slot="header">
           <div class="card-icon">
-            <i class="fab fa-twitter"></i>
+            <md-icon>input</md-icon>
           </div>
-          <p class="category">Folowers</p>
+          <p class="category">Submissions</p>
           <h3 class="title">
             +<animated-number :value="245"></animated-number>
           </h3>
@@ -46,11 +46,11 @@
       <stats-card header-color="green">
         <template slot="header">
           <div class="card-icon">
-            <md-icon>store</md-icon>
+            <md-icon>list_alt</md-icon>
           </div>
-          <p class="category">Revenue</p>
+          <p class="category">Votes</p>
           <h3 class="title">
-            $ <animated-number :value="34"></animated-number>,<animated-number
+            <animated-number :value="34"></animated-number>,<animated-number
               :value="245"
             ></animated-number>
           </h3>
@@ -68,18 +68,18 @@
       <stats-card header-color="warning">
         <template slot="header">
           <div class="card-icon">
-            <md-icon>weekend</md-icon>
+            <md-icon>how_to_reg</md-icon>
           </div>
-          <p class="category">Bookings</p>
+          <p class="category">Artists</p>
           <h3 class="title">
-            <animated-number :value="184"></animated-number>
+            <animated-number :value="55"></animated-number>
           </h3>
         </template>
 
         <template slot="footer">
           <div class="stats">
-            <md-icon class="text-danger">warning</md-icon>
-            <a href="#pablo">Get More Space...</a>
+            <md-icon>update</md-icon>
+            Just Updated
           </div>
         </template>
       </stats-card>
@@ -88,7 +88,7 @@
       class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
     >
       <chart-card
-        header-animation="true"
+        header-animation="false"
         :chart-data="emailsSubscriptionChart.data"
         :chart-options="emailsSubscriptionChart.options"
         :chart-responsive-options="emailsSubscriptionChart.responsiveOptions"
@@ -125,6 +125,7 @@
       class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
     >
       <chart-card
+      header-animation="false"
         :chart-data="dailySalesChart.data"
         :chart-options="dailySalesChart.options"
         chart-type="Line"
@@ -141,13 +142,13 @@
         </md-button>
 
         <template slot="content">
-          <h4 class="title">Daily Sales</h4>
+          <h4 class="title">Daily Submissions</h4>
           <p class="category">
             <span class="text-success"
               ><i class="fas fa-long-arrow-alt-up"></i>
               <animated-number :value="55"></animated-number>%
             </span>
-            increase in today sales.
+            increase in submissions.
           </p>
         </template>
 
@@ -163,6 +164,7 @@
       class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
     >
       <chart-card
+      header-animation="false"
         :chart-data="dataCompletedTasksChart.data"
         :chart-options="dataCompletedTasksChart.options"
         chart-type="Line"
@@ -179,16 +181,16 @@
         </md-button>
 
         <template slot="content">
-          <h4 class="title">Completed Tasks</h4>
+          <h4 class="title">Votes</h4>
           <p class="category">
-            Last Campaign Performance
+            Vote graph information
           </p>
         </template>
 
         <template slot="footer">
           <div class="stats">
             <md-icon>access_time</md-icon>
-            campaign sent
+            updated
             <animated-number :value="26"></animated-number> minutes ago
           </div>
         </template>
@@ -200,7 +202,7 @@
           <div class="card-icon">
             <md-icon>language</md-icon>
           </div>
-          <h4 class="title">Global Sales by Top Locations</h4>
+          <h4 class="title">Website views by locations</h4>
         </template>
 
         <template slot="content">
@@ -215,123 +217,7 @@
         </template>
       </global-sales-card>
     </div>
-    <div
-      class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
-    >
-      <product-card header-animation="true">
-        <img class="img" slot="imageHeader" :src="product1" />
-        <md-icon slot="fixed-button">build</md-icon>
-        <template slot="first-button">
-          <md-icon>art_track</md-icon>
-          <md-tooltip md-direction="bottom">View</md-tooltip>
-        </template>
-        <template slot="second-button">
-          <md-icon>edit</md-icon>
-          <md-tooltip md-direction="bottom">Edit</md-tooltip>
-        </template>
-        <template slot="third-button">
-          <md-icon>close</md-icon>
-          <md-tooltip md-direction="bottom">Remove</md-tooltip>
-        </template>
-        <h4 slot="title" class="title">
-          <a href="#pablo">Cozy 5 Stars Apartment</a>
-        </h4>
-        <div slot="description" class="card-description">
-          The place is close to Barceloneta Beach and bus stop just 2 min by
-          walk and near to "Naviglio" where you can enjoy the main night life in
-          Barcelona.
-        </div>
-        <template slot="footer">
-          <div class="price">
-            <h4>$899/night</h4>
-          </div>
-          <div class="stats">
-            <p class="category">
-              <md-icon>place</md-icon>
-              Barcelona, Spain
-            </p>
-          </div>
-        </template>
-      </product-card>
-    </div>
-    <div
-      class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
-    >
-      <product-card header-animation="true">
-        <img class="img" slot="imageHeader" :src="product2" />
-        <md-icon slot="fixed-button">build</md-icon>
-        <template slot="first-button">
-          <md-icon>art_track</md-icon>
-          <md-tooltip md-direction="bottom">View</md-tooltip>
-        </template>
-        <template slot="second-button">
-          <md-icon>edit</md-icon>
-          <md-tooltip md-direction="bottom">Edit</md-tooltip>
-        </template>
-        <template slot="third-button">
-          <md-icon>close</md-icon>
-          <md-tooltip md-direction="bottom">Remove</md-tooltip>
-        </template>
-        <h4 slot="title" class="title">
-          <a href="#pablo">Office Studio</a>
-        </h4>
-        <div slot="description" class="card-description">
-          The place is close to Metro Station and bus stop just 2 min by walk
-          and near to "Naviglio" where you can enjoy the night life in London,
-          UK.
-        </div>
-        <template slot="footer">
-          <div class="price">
-            <h4>$1.119/night</h4>
-          </div>
-          <div class="stats">
-            <p class="category">
-              <md-icon>place</md-icon>
-              London, UK
-            </p>
-          </div>
-        </template>
-      </product-card>
-    </div>
-    <div
-      class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
-    >
-      <product-card header-animation="true">
-        <img class="img" slot="imageHeader" :src="product3" />
-        <md-icon slot="fixed-button">build</md-icon>
-        <template slot="first-button">
-          <md-icon>art_track</md-icon>
-          <md-tooltip md-direction="bottom">View</md-tooltip>
-        </template>
-        <template slot="second-button">
-          <md-icon>edit</md-icon>
-          <md-tooltip md-direction="bottom">Edit</md-tooltip>
-        </template>
-        <template slot="third-button">
-          <md-icon>close</md-icon>
-          <md-tooltip md-direction="bottom">Remove</md-tooltip>
-        </template>
-        <h4 slot="title" class="title">
-          <a href="#pablo">Beautiful Castle</a>
-        </h4>
-        <div slot="description" class="card-description">
-          The place is close to Metro Station and bus stop just 2 min by walk
-          and near to "Naviglio" where you can enjoy the main night life in
-          Milan.
-        </div>
-        <template slot="footer">
-          <div class="price">
-            <h4>$459/night</h4>
-          </div>
-          <div class="stats">
-            <p class="category">
-              <md-icon>place</md-icon>
-              Milan, Italy
-            </p>
-          </div>
-        </template>
-      </product-card>
-    </div>
+    
   </div>
 </template>
 
