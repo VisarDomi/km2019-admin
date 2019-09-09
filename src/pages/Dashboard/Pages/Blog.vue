@@ -48,12 +48,11 @@
         </div>
         <template slot="footer">
           <div class="price">
-            <h4>$899/night</h4>
+            <h4>22.10.2019</h4>
           </div>
           <div class="stats">
             <p class="category">
-              <md-icon>place</md-icon>
-              Barcelona, Spain
+
             </p>
           </div>
         </template>
