@@ -3,10 +3,11 @@
 
       <div class="md-layout">
 
-      <div class="md-layout-item md-medium-size-100 md-size-20">
+      <div class="md-layout-item md-medium-size-100 md-size-25">
         <md-card>
               <md-card-media>
-                <md-ripple>
+                <md-ripple style="margin-left: auto;
+    margin-right: auto;">
                   <img src="https://www.teksteshqip.com/img_upz/galeri_full/182/182857.jpg" alt="People" >
                 </md-ripple>
               </md-card-media>
@@ -44,3 +45,8 @@ export default {
   }
 };
 </script>
+
+
+<style lang="css" scoped>
+
+</style>
