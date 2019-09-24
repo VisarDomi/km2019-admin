@@ -1,8 +1,9 @@
-// auth
-export const LOGIN = "login";
-export const LOGOUT = "logout";
-export const REGISTER = "register";
-export const CHECK_AUTH = "checkAuth";
+// general
+export const PUT = "put";
+export const DELETE = "delete";
 
-// profile
-export const FETCH_PROFILE = "fetchProfile";
+// artist
+export const LIST_ARTIST = "listArtist"
+export const GET_ARTIST = "getArtist"
+
+export const LIST_VOTE = "listVote"

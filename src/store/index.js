@@ -1,15 +1,28 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import auth from "./modules/auth";
 import loading from "./modules/loading";
-import profile from "./modules/profile";
+import artist from "./modules/artist";
+import vote from "./modules/vote";
+import album from "./modules/album";
+import { ApiService } from "./services/api";
+import { PUT, DELETE } from "./actions.type";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
-    auth,
     loading,
-    profile
+    artist,
+    vote,
+    album
+  },
+  actions: {
+    async [PUT](context, payload) {
+      await ApiService.put(payload);
+    },
+    async [DELETE](context, payload) {
+      await ApiService.delete(payload);
+    }
   },
   strict: process.env.NODE_ENV !== "production"
 });

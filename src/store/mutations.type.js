@@ -1,12 +1,16 @@
-// auth
-export const SET_AUTH_SECOND = "setUserButNoToken";
-export const SET_AUTH = "setUserAndToken";
-export const PURGE_AUTH = "purgeAuth";
-export const SET_ROLE = "setRole";
-
 // loading
 export const START_LOADING = "startLoading";
 export const STOP_LOADING = "stopLoading";
 
-// profile
-export const SET_PROFILE = "setProfile";
+// artist
+export const SET_ARTISTS = "setArtists";
+export const SET_ARTIST = "setArtist";
+
+// album
+export const SET_ALBUMS = "setAlbums";
+export const SET_ALBUM = "setAlbum";
+
+// photos
+export const SET_ALBUM_FILES = "setAlbumFiles";
+
+export const SET_VOTES = "setVotes";
