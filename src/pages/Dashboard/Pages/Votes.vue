@@ -1,8 +1,12 @@
 <template>
   <div>
+    <br />
+    <div>Votes are {{votes}}</div>
+    <br />
+    <br />
+    <br />
     <div v-for="artist of this.getArtists">
       <div>{{artist.name}}</div>
-      <div>{{votes}}</div>
       <button @click="fetchVotes(artist.id)">Get Votes of {{artist.name}}</button>
     </div>
   </div>
@@ -24,7 +28,7 @@ export default {
   components: {},
   methods: {
     async fetchVotes(artistId) {
-      console.log("artistId", artistId)
+      console.log("artistId", artistId);
       const TableName = "KM2019-Vote";
       const params = {
         TableName,
@@ -41,7 +45,7 @@ export default {
       //   list_ids.push(vote.artistId);
       // }
       // this.fetchArtistNames(list_votes, list_ids);
-    },
+    }
     // async fetchArtistNames(votes, ids) {
     //   let i = 0;
     //   for (let singleId of ids) {
@@ -66,7 +70,7 @@ export default {
       TableName,
       Limit: 100
     };
-    await this.$store.dispatch(LIST_ARTIST, params)
+    await this.$store.dispatch(LIST_ARTIST, params);
   }
 };
 </script>
