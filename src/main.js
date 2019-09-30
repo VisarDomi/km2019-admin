@@ -1,8 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import DashboardPlugin from "./material-dashboard";
-import { CHECK_AUTH } from "./store/actions.type";
-import { ApiService } from "./common/api.service";
+// import { CHECK_AUTH } from "./store/actions.type";
+import { ApiService } from "./store/services/api";
 import { yearFormat, hourFormat } from "./common/date.filter";
 import ErrorFilter from "./common/error.filter";
 
@@ -20,14 +20,14 @@ Vue.use(DashboardPlugin);
 
 Vue.config.productionTip = false;
 // filter
-Vue.filter('money', function (value) {
+Vue.filter("money", function(value) {
   if (typeof value !== "number") {
-      return value;
+    return value;
   }
-  var formatter = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'EUR',
-      minimumFractionDigits: 0
+  var formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "EUR",
+    minimumFractionDigits: 0
   });
   return formatter.format(value);
 });
@@ -52,11 +52,11 @@ Object.defineProperty(Vue.prototype, "$Chartist", {
 });
 
 // Ensure we checked auth before each page load.
-router.beforeEach(
-  (to, from, next) => {
-    Promise.all([store.dispatch(CHECK_AUTH)]).then(next);
-  }
-);
+// router.beforeEach(
+//   (to, from, next) => {
+//     Promise.all([store.dispatch(CHECK_AUTH)]).then(next);
+//   }
+// );
 // dinamically change title and other metadata
 router.beforeEach((to, from, next) => {
   // This goes through the matched routes from last to first, finding the closest route with a title.
