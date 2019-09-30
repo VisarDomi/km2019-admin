@@ -1,14 +1,11 @@
 <template>
   <div>
+    <div v-for="artist of this.getArtists">
+      <button @click="fetchVotes(artist.id)">Get Votes of {{artist.name}}</button>
+    </div>
     <br />
     <div>Votes are {{votes}}</div>
     <br />
-    <br />
-    <br />
-    <div v-for="artist of this.getArtists">
-      <div>{{artist.name}}</div>
-      <button @click="fetchVotes(artist.id)">Get Votes of {{artist.name}}</button>
-    </div>
   </div>
 </template>
 
