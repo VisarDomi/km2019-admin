@@ -1,167 +1,135 @@
 <template>
   <div class="md-layout">
-    <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25">
-      <stats-card header-color="blue">
-        <template slot="header">
-          <div class="card-icon">
-            <md-icon>input</md-icon>
-          </div>
-          <p class="category">Submissions</p>
-          <h3 class="title">
-            +<animated-number :value="245"></animated-number>
-          </h3>
-        </template>
 
-        <template slot="footer">
-          <div class="stats">
-            <md-icon>update</md-icon>
-            Just Updated
-          </div>
-        </template>
-      </stats-card>
-    </div>
-    <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25">
-      <stats-card header-color="rose">
-        <template slot="header">
-          <div class="card-icon">
-            <md-icon>equalizer</md-icon>
-          </div>
-          <p class="category">Website Visits</p>
-          <h3 class="title">
-            <animated-number :value="75"></animated-number>.<animated-number
-              :value="521"
-            ></animated-number>
-          </h3>
-        </template>
 
-        <template slot="footer">
-          <div class="stats">
-            <md-icon>local_offer</md-icon>
-            Tracked from Google Analytics
-          </div>
-        </template>
-      </stats-card>
+    <div class="md-layout-item md-size-50">
+              <chart-card
+          header-animation="false"
+          :chart-data="pieChart.data"
+          :chart-options="pieChart.options"
+          chart-type="Pie"
+          header-icon
+          chart-inside-content
+          background-color="green"
+        >
+          <template slot="chartInsideHeader">
+            <div class="card-icon">
+              <md-icon>pie_chart</md-icon>
+            </div>
+            <h4 class="title">
+              Pie Chart
+            </h4>
+          </template>
+          <template slot="footer">
+            <div class="md-layout">
+              <div class="md-layout-item md-size-100">
+                <h6 class="category">Legend</h6>
+              </div>
+              <div class="md-layout-item">
+                <i class="fa fa-circle text-info"></i> Apple
+                <i class="fa fa-circle text-warning"></i> Samsung
+                <i class="fa fa-circle text-danger"></i> Windows Phone
+              </div>
+            </div>
+          </template>
+        </chart-card>
     </div>
-    <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25">
-      <stats-card header-color="green">
-        <template slot="header">
-          <div class="card-icon">
-            <md-icon>list_alt</md-icon>
-          </div>
-          <p class="category">Votes</p>
-          <h3 class="title">
-            <animated-number :value="34"></animated-number>,<animated-number
-              :value="245"
-            ></animated-number>
-          </h3>
-        </template>
 
-        <template slot="footer">
-          <div class="stats">
-            <md-icon>date_range</md-icon>
-            Last <animated-number :value="24"></animated-number> Hours
-          </div>
-        </template>
-      </stats-card>
-    </div>
-    <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25">
-      <stats-card header-color="warning">
-        <template slot="header">
-          <div class="card-icon">
-            <md-icon>how_to_reg</md-icon>
-          </div>
-          <p class="category">Artists</p>
-          <h3 class="title">
-            <animated-number :value="55"></animated-number>
-          </h3>
-        </template>
 
-        <template slot="footer">
-          <div class="stats">
-            <md-icon>update</md-icon>
-            Just Updated
-          </div>
-        </template>
-      </stats-card>
+    <div class="md-layout md-layout-item md-size-50">
+
+
+      <div class="md-layout-item  md-size-50 ">
+        <stats-card header-color="rose">
+          <template slot="header">
+            <div class="card-icon">
+              <md-icon>equalizer</md-icon>
+            </div>
+            <p class="category">Website Visits</p>
+            <h3 class="title">
+              <animated-number :value="75"></animated-number>.<animated-number
+                :value="521"
+              ></animated-number>
+            </h3>
+          </template>
+
+          <template slot="footer">
+            <div class="stats">
+              <md-icon>local_offer</md-icon>
+              Tracked from Google Analytics
+            </div>
+          </template>
+        </stats-card>
+      </div>
+      <div class="md-layout-item md-size-50 ">
+        <stats-card header-color="blue">
+          <template slot="header">
+            <div class="card-icon">
+              <md-icon>list_alt</md-icon>
+            </div>
+            <p class="category">Votes</p>
+            <h3 class="title">
+              <animated-number :value="34"></animated-number>,<animated-number
+                :value="245"
+              ></animated-number>
+            </h3>
+          </template>
+
+          <template slot="footer">
+            <div class="stats">
+              <md-icon>date_range</md-icon>
+              Last <animated-number :value="24"></animated-number> Hours
+            </div>
+          </template>
+        </stats-card>
+      </div>
+
+      <div       class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"    >
+        <chart-card
+          header-animation="false"
+          :chart-data="emailsSubscriptionChart.data"
+          :chart-options="emailsSubscriptionChart.options"
+          :chart-responsive-options="emailsSubscriptionChart.responsiveOptions"
+          chart-type="Bar"
+          chart-inside-header
+          background-color="rose"
+        >
+          <md-icon slot="fixed-button">build</md-icon>
+          <md-button class="md-simple md-info md-just-icon" slot="first-button">
+            <md-icon>refresh</md-icon>
+            <md-tooltip md-direction="bottom">Refresh</md-tooltip>
+          </md-button>
+          <md-button class="md-simple md-just-icon" slot="second-button">
+            <md-icon>edit</md-icon>
+            <md-tooltip md-direction="bottom">Change Date</md-tooltip>
+          </md-button>
+
+          <template slot="content">
+            <h4 class="title">Website Views</h4>
+
+          </template>
+
+          <template slot="footer">
+            <div class="stats">
+              <md-icon>access_time</md-icon>
+              updated <animated-number :value="10"></animated-number> days ago
+            </div>
+          </template>
+        </chart-card>
+      </div>
+
     </div>
+
+
+
+
+
+
+    
+
+
     <div
-      class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
-    >
-      <chart-card
-        header-animation="false"
-        :chart-data="emailsSubscriptionChart.data"
-        :chart-options="emailsSubscriptionChart.options"
-        :chart-responsive-options="emailsSubscriptionChart.responsiveOptions"
-        chart-type="Bar"
-        chart-inside-header
-        background-color="rose"
-      >
-        <md-icon slot="fixed-button">build</md-icon>
-        <md-button class="md-simple md-info md-just-icon" slot="first-button">
-          <md-icon>refresh</md-icon>
-          <md-tooltip md-direction="bottom">Refresh</md-tooltip>
-        </md-button>
-        <md-button class="md-simple md-just-icon" slot="second-button">
-          <md-icon>edit</md-icon>
-          <md-tooltip md-direction="bottom">Change Date</md-tooltip>
-        </md-button>
-
-        <template slot="content">
-          <h4 class="title">Website Views</h4>
-          <p class="category">
-            Last Campaign Performance
-          </p>
-        </template>
-
-        <template slot="footer">
-          <div class="stats">
-            <md-icon>access_time</md-icon>
-            updated <animated-number :value="10"></animated-number> days ago
-          </div>
-        </template>
-      </chart-card>
-    </div>
-    <div
-      class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
-    >
-      <chart-card
-      header-animation="false"
-        :chart-data="dailySalesChart.data"
-        :chart-options="dailySalesChart.options"
-        chart-type="Line"
-        chart-inside-header
-        background-color="green"
-      >
-        <md-button class="md-simple md-info md-just-icon" slot="first-button">
-          <md-icon>refresh</md-icon>
-          <md-tooltip md-direction="bottom">Refresh</md-tooltip>
-        </md-button>
-        <md-button class="md-simple md-just-icon" slot="second-button">
-          <md-icon>edit</md-icon>
-          <md-tooltip md-direction="bottom">Change Date</md-tooltip>
-        </md-button>
-
-        <template slot="content">
-          <h4 class="title">Daily Submissions</h4>
-          <p class="category">
-            <span class="text-success"
-              ><i class="fas fa-long-arrow-alt-up"></i>
-              <animated-number :value="55"></animated-number>%
-            </span>
-            increase in submissions.
-          </p>
-        </template>
-
-        <template slot="footer">
-          <div class="stats">
-            <md-icon>access_time</md-icon>
-            updated <animated-number :value="4"></animated-number> minutes ago
-          </div>
-        </template>
-      </chart-card>
-    </div>
-    <div
-      class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
+      class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
     >
       <chart-card
       header-animation="false"
@@ -196,7 +164,7 @@
         </template>
       </chart-card>
     </div>
-    <div class="md-layout-item md-size-100">
+    <div class="md-layout-item md-size-50">
       <global-sales-card header-color="green">
         <template slot="header">
           <div class="card-icon">
@@ -207,17 +175,22 @@
 
         <template slot="content">
           <div class="md-layout">
-            <div class="md-layout-item md-size-50">
+            <div class="md-layout-item md-size-100">
               <global-sales-table></global-sales-table>
             </div>
-            <div class="md-layout-item md-size-50">
-              <async-world-map class="map" :data="mapData"></async-world-map>
-            </div>
+
           </div>
         </template>
       </global-sales-card>
     </div>
+
+    <div class="md-layout-item md-size-100 h-55">
+      <async-world-map class="map" :data="mapData"></async-world-map>
+    </div>
     
+
+
+
   </div>
 </template>
 
@@ -245,6 +218,15 @@ export default {
   },
   data() {
     return {
+      pieChart: {
+        data: {
+          labels: ["62%", "32%", "6%"],
+          series: [62, 32, 6]
+        },
+        options: {
+          height: "230px"
+        }
+      },
       product1: "./img/card-2.jpg",
       product2: "./img/card-3.jpg",
       product3: "./img/card-1.jpg",

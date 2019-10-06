@@ -43,7 +43,7 @@
       <div class="copyright text-center">
         &copy; {{ new Date().getFullYear() }}
         <a href="#" target="_blank"
-          >OrangeLimo</a
+          >Kenga Magjike</a
         >
       </div>
     </div>

@@ -4,11 +4,11 @@ export function setMeta(title) {
         metaTags: [
           {
             name: "description",
-            content: `The ${title} page of Orange Limo.`
+            content: `Kenga Magjike Admin - ${title}`
           },
           {
             property: "og:description",
-            content: `The ${title} page of Orange Limo.`
+            content: `Kenga Magjike Admin - ${title}`
           }
         ]
       }
