@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-table v-model="users" class="md-table-global-sales">
+    <md-table v-model="countryData" class="md-table-global-sales">
       <md-table-row slot="md-table-row" slot-scope="{ item }">
         <md-table-cell md-label="">
           <div class="flag">
@@ -18,6 +18,12 @@
 <script>
 export default {
   name: "global-sales-table",
+  props:{
+    countryData:{
+      type: Array,
+      default: null
+    }
+  },
   data() {
     return {
       selected: [],

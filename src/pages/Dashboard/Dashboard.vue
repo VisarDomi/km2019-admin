@@ -1,58 +1,44 @@
 <template>
   <div class="md-layout">
-
     <div class="md-layout-item md-size-100 md-layout">
-
-      <div class="md-layout-item md-size-50">
-
-        <!-- The Sign-in button. This will run `queryReports()` on success. -->
-        <p class="g-signin2" id="g-signin2" data-onsuccess="queryReports"></p>
-      </div>
-
-      <div class="md-layout-item md-size-50">
-        <!-- The API response will be printed here. -->
-        <textarea cols="80" rows="20" id="query-output"></textarea>
-      </div>
+      <!-- The Sign-in button. This will run `queryReports()` on success. -->
+      <p class="g-signin2" id="g-signin2" data-onsuccess="queryReports"></p>
     </div>
     <div class="md-layout-item md-size-50">
-              <chart-card
-          header-animation="false"
-          :chart-data="pieChart.data"
-          :chart-options="pieChart.options"
-          chart-type="Pie"
-          header-icon
-          chart-inside-content
-          background-color="green"
-        >
-          <template slot="chartInsideHeader">
-            <div class="card-icon">
-              <md-icon>pie_chart</md-icon>
+      <chart-card
+        v-if="loaded"
+        header-animation="false"
+        :chart-data="pieChart.data"
+        :chart-options="pieChart.options"
+        chart-type="Pie"
+        header-icon
+        chart-inside-content
+        background-color="green"
+      >
+        <template slot="chartInsideHeader">
+          <div class="card-icon">
+            <md-icon>pie_chart</md-icon>
+          </div>
+          <h4 class="title">Pie Chart</h4>
+        </template>
+        <template slot="footer">
+          <div class="md-layout">
+            <div class="md-layout-item md-size-100">
+              <h6 class="category">Legend</h6>
             </div>
-            <h4 class="title">
-              Pie Chart
-            </h4>
-          </template>
-          <template slot="footer">
-            <div class="md-layout">
-              <div class="md-layout-item md-size-100">
-                <h6 class="category">Legend</h6>
-              </div>
-              <div class="md-layout-item">
-                <i class="fa fa-circle text-info"></i> Apple
-                <i class="fa fa-circle text-warning"></i> Samsung
-                <i class="fa fa-circle text-danger"></i> Windows Phone
-              </div>
+            <div class="md-layout-item">
+              <i class="fa fa-circle text-info"></i> Tablet
+              <i class="fa fa-circle text-warning"></i> Desktop
+              <i class="fa fa-circle text-danger"></i> Mobile
             </div>
-          </template>
-        </chart-card>
+          </div>
+        </template>
+      </chart-card>
     </div>
 
-
     <div class="md-layout md-layout-item md-size-50">
-
-
-      <div class="md-layout-item  md-size-50 ">
-        <stats-card header-color="rose">
+      <div class="md-layout-item md-size-50">
+        <stats-card header-color="rose" v-if="loaded">
           <template slot="header">
             <div class="card-icon">
               <md-icon>equalizer</md-icon>
@@ -60,19 +46,17 @@
             <p class="category">Website Visits</p>
             <h3 class="title">
               <animated-number :value="websiteVisits"></animated-number>
-              
             </h3>
           </template>
 
           <template slot="footer">
             <div class="stats">
-              <md-icon>local_offer</md-icon>
-              Tracked from Google Analytics
+              <md-icon>local_offer</md-icon>Tracked from Google Analytics
             </div>
           </template>
         </stats-card>
       </div>
-      <div class="md-layout-item md-size-50 ">
+      <div class="md-layout-item md-size-50">
         <stats-card header-color="blue">
           <template slot="header">
             <div class="card-icon">
@@ -80,22 +64,40 @@
             </div>
             <p class="category">Votes</p>
             <h3 class="title">
-              <animated-number :value="34"></animated-number>,<animated-number
-                :value="245"
-              ></animated-number>
+              <animated-number :value="34"></animated-number>,
+              <animated-number :value="245"></animated-number>
             </h3>
           </template>
 
           <template slot="footer">
             <div class="stats">
-              <md-icon>date_range</md-icon>
-              Last <animated-number :value="24"></animated-number> Hours
+              <md-icon>date_range</md-icon>Last
+              <animated-number :value="24"></animated-number>Hours
             </div>
           </template>
         </stats-card>
       </div>
 
-      <div       class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"    >
+          <div class="md-layout-item md-size-100">
+      <global-sales-card header-color="green">
+        <template slot="header">
+          <div class="card-icon">
+            <md-icon>language</md-icon>
+          </div>
+          <h4 class="title">Website views by locations</h4>
+        </template>
+
+        <template slot="content">
+          <div class="md-layout">
+            <div class="md-layout-item md-size-100">
+              <global-sales-table :countryData="this.countryData" v-if="loaded"></global-sales-table>
+            </div>
+          </div>
+        </template>
+      </global-sales-card>
+    </div>
+
+      <!-- <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
         <chart-card
           header-animation="false"
           :chart-data="emailsSubscriptionChart.data"
@@ -117,33 +119,21 @@
 
           <template slot="content">
             <h4 class="title">Website Views</h4>
-
           </template>
 
           <template slot="footer">
             <div class="stats">
-              <md-icon>access_time</md-icon>
-              updated <animated-number :value="10"></animated-number> days ago
+              <md-icon>access_time</md-icon>updated
+              <animated-number :value="10"></animated-number>days ago
             </div>
           </template>
         </chart-card>
-      </div>
-
+      </div> -->
     </div>
 
-
-
-
-
-
-    
-
-
-    <div
-      class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
-    >
+    <!-- <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50">
       <chart-card
-      header-animation="false"
+        header-animation="false"
         :chart-data="dataCompletedTasksChart.data"
         :chart-options="dataCompletedTasksChart.options"
         chart-type="Line"
@@ -161,56 +151,30 @@
 
         <template slot="content">
           <h4 class="title">Votes</h4>
-          <p class="category">
-            Vote graph information
-          </p>
+          <p class="category">Vote graph information</p>
         </template>
 
         <template slot="footer">
           <div class="stats">
-            <md-icon>access_time</md-icon>
-            updated
-            <animated-number :value="26"></animated-number> minutes ago
+            <md-icon>access_time</md-icon>updated
+            <animated-number :value="26"></animated-number>minutes ago
           </div>
         </template>
       </chart-card>
-    </div>
-    <div class="md-layout-item md-size-50">
-      <global-sales-card header-color="green">
-        <template slot="header">
-          <div class="card-icon">
-            <md-icon>language</md-icon>
-          </div>
-          <h4 class="title">Website views by locations</h4>
-        </template>
+    </div> -->
 
-        <template slot="content">
-          <div class="md-layout">
-            <div class="md-layout-item md-size-100">
-              <global-sales-table></global-sales-table>
-            </div>
-
-          </div>
-        </template>
-      </global-sales-card>
-    </div>
 
     <div class="md-layout-item md-size-100 h-55">
-      <async-world-map class="map" :data="mapData"></async-world-map>
+      <async-world-map class="map" :data="mapData" v-if="loaded"></async-world-map>
     </div>
-    
-
-
-
   </div>
 </template>
 
 
 
 <script>
-
 // Replace with your view ID.
-  var VIEW_ID = '202143083';
+var VIEW_ID = "202143083";
 
 import AsyncWorldMap from "@/components/WorldMap/AsyncWorldMap.vue";
 import {
@@ -234,55 +198,185 @@ export default {
     AsyncWorldMap
   },
 
-  methods:{ 
+  methods: {
     queryReports() {
-      gapi.client.request({
-        path: '/v4/reports:batchGet',
-        root: 'https://analyticsreporting.googleapis.com/',
-        method: 'POST',
-        body: {
-          reportRequests: [
-            {
-              viewId: VIEW_ID,
-              dateRanges: [
-                {
-                  startDate: '2019-09-20',
-                  endDate: 'today'
-                }
-              ],
-              metrics: [
-                {
-                  expression: 'ga:sessions'
-                },
-                {
-                  expression: 'ga:pageviews'
-                }
-              ]
-            }
-          ]
-        }
-      }).then(this.displayResults, console.error.bind(console));
+      gapi.client
+        .request({
+          path: "/v4/reports:batchGet",
+          root: "https://analyticsreporting.googleapis.com/",
+          method: "POST",
+          body: {
+            reportRequests: [
+              {
+                viewId: VIEW_ID,
+                dateRanges: [
+                  {
+                    startDate: "2019-09-20",
+                    endDate: "today"
+                  }
+                ],
+                metrics: [
+                  {
+                    expression: "ga:pageviews"
+                  }
+                ],
+                dimensions: [
+                  {
+                    name: "ga:deviceCategory"
+                  }
+                ]
+              },
+              {
+                viewId: VIEW_ID,
+                dateRanges: [
+                  {
+                    startDate: "2019-09-20",
+                    endDate: "today"
+                  }
+                ],
+                metrics: [
+                  {
+                    expression: "ga:pageviews"
+                  }
+                ],
+                dimensions: [
+                  {
+                    name: "ga:countryIsoCode"
+                  }
+                ],
+                orderBys: [
+                  { fieldName: "ga:pageviews", sortOrder: "DESCENDING" }
+                ]
+              }
+            ]
+          }
+        })
+        .then(this.displayResults, console.error.bind(console));
+
     },
     displayResults(response) {
-      // var formattedJson = JSON.stringify(response.result, null, 2);
-      // console.log(response.result.reports[0].data)
-      this.websiteVisits = response.result.reports[0].data.rows[0].metrics[0].values[1]
-      console.log(this.websiteVisits)
+      this.loaded = false;
+      console.log(response)
+
+      this.websiteVisits = response.result.reports[0].data.totals[0].values[0];
+      
+      this.desktopVisits =
+        response.result.reports[0].data.rows[0].metrics[0].values[0];
+      
+      this.mobileVisits =
+        response.result.reports[0].data.rows[1].metrics[0].values[0];
+      
+      this.tabletVisits =
+        response.result.reports[0].data.rows[2].metrics[0].values[0];
+
+      this.pieChart.data.labels = [];
+      this.pieChart.data.labels.push(
+        Math.ceil((this.desktopVisits / this.websiteVisits) * 100) + "%"
+      );
+      this.pieChart.data.labels.push(
+        Math.ceil((this.mobileVisits / this.websiteVisits) * 100) + "%"
+      );
+      this.pieChart.data.labels.push(
+        Math.ceil((this.tabletVisits / this.websiteVisits) * 100) + "%"
+      );
+
+      this.pieChart.data.series = [];
+      this.pieChart.data.series.push(this.desktopVisits);
+      this.pieChart.data.series.push(this.mobileVisits);
+      this.pieChart.data.series.push(this.tabletVisits);
+
+
+
+
+      let isoCode1 = response.result.reports[1].data.rows[0].dimensions[0];
+      let isoCode2 = response.result.reports[1].data.rows[1].dimensions[0];
+      let isoCode3 = response.result.reports[1].data.rows[2].dimensions[0];
+      let isoCode4 = response.result.reports[1].data.rows[3].dimensions[0];
+      let isoCode5 = response.result.reports[1].data.rows[4].dimensions[0];
+      let isoCode6 = response.result.reports[1].data.rows[5].dimensions[0];
+
+      let pageviews1 = response.result.reports[1].data.rows[0].metrics[0].values[0];
+      let pageviews2 = response.result.reports[1].data.rows[1].metrics[0].values[0];
+      let pageviews3 = response.result.reports[1].data.rows[2].metrics[0].values[0];
+      let pageviews4 = response.result.reports[1].data.rows[3].metrics[0].values[0];
+      let pageviews5 = response.result.reports[1].data.rows[4].metrics[0].values[0];
+      let pageviews6 = response.result.reports[1].data.rows[5].metrics[0].values[0];
+
+      this.mapData = {
+        [isoCode1]: pageviews1, 
+        [isoCode2]: pageviews2, 
+        [isoCode3]: pageviews3, 
+        [isoCode4]: pageviews4, 
+        [isoCode5]: pageviews5, 
+        [isoCode6]: pageviews6, 
+      }
+
+      this.countryData = [
+        {
+          flag: "./img/flags/"+isoCode1+".png",
+          country: isoCode1,
+          sales: pageviews1,
+          percent: Math.ceil((pageviews1 / this.websiteVisits) * 100) + "%"
+        },
+        {
+          flag: "./img/flags/"+isoCode2+".png",
+          country: isoCode2,
+          sales: pageviews2,
+          percent: Math.ceil((pageviews2 / this.websiteVisits) * 100) + "%"
+        },
+        {
+          flag: "./img/flags/"+isoCode3+".png",
+          country: isoCode3,
+          sales: pageviews3,
+          percent: Math.ceil((pageviews3 / this.websiteVisits) * 100) + "%"
+        },        
+        {
+          flag: "./img/flags/"+isoCode4+".png",
+          country: isoCode4,
+          sales: pageviews4,
+          percent: Math.ceil((pageviews4 / this.websiteVisits) * 100) + "%"
+        },
+        {
+          flag: "./img/flags/"+isoCode5+".png",
+          country: isoCode5,
+          sales: pageviews5,
+          percent: Math.ceil((pageviews5 / this.websiteVisits) * 100) + "%"
+        },
+        {
+          flag: "./img/flags/"+isoCode6+".png",
+          country: isoCode6,
+          sales: pageviews6,
+          percent: Math.ceil((pageviews6 / this.websiteVisits) * 100) + "%"
+        },
+      ]
+
+      console.log(this.mapData, "this.mapDAta")
+      console.log(this.countryData, "this.countryData")
+
+      this.loaded = true;
     }
   },
-  async mounted(){
-    await gapi.signin2.render('g-signin2', { // this is the button "id"
+  async mounted() {
+    await gapi.signin2.render("g-signin2", {
+      // this is the button "id"
       onsuccess: this.queryReports // note, no "()" here
-    })
-
+    });
   },
   data() {
     return {
-      websiteVisits: null,
+      countryData: null,
+      loaded: false,
+      websiteVisits: 0,
+      desktopVisits: 0,
+      mobileVisits: 0,
+      tabletVisits: 0,
+      countryVisits: [
+
+      ],
       pieChart: {
         data: {
-          labels: ["62%", "32%", "6%"],
-          series: [62, 32, 6]
+          labels: [],
+          series: []
         },
         options: {
           height: "230px"
@@ -290,101 +384,7 @@ export default {
       },
       seq2: 0,
       mapData: {
-        AU: 760,
-        BR: 550,
-        CA: 120,
-        DE: 1300,
-        FR: 540,
-        GB: 690,
-        GE: 200,
-        IN: 200,
-        RO: 600,
-        RU: 300,
-        US: 2920
-      },
-      dailySalesChart: {
-        data: {
-          labels: ["M", "T", "W", "T", "F", "S", "S"],
-          series: [[12, 17, 7, 17, 23, 18, 38]]
-        },
-        options: {
-          lineSmooth: this.$Chartist.Interpolation.cardinal({
-            tension: 0
-          }),
-          low: 0,
-          high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-          chartPadding: {
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0
-          }
-        }
-      },
-      dataCompletedTasksChart: {
-        data: {
-          labels: ["12am", "3pm", "6pm", "9pm", "12pm", "3am", "6am", "9am"],
-          series: [[230, 750, 450, 300, 280, 240, 200, 190]]
-        },
 
-        options: {
-          lineSmooth: this.$Chartist.Interpolation.cardinal({
-            tension: 0
-          }),
-          low: 0,
-          high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-          chartPadding: {
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0
-          }
-        }
-      },
-      emailsSubscriptionChart: {
-        data: {
-          labels: [
-            "Ja",
-            "Fe",
-            "Ma",
-            "Ap",
-            "Mai",
-            "Ju",
-            "Jul",
-            "Au",
-            "Se",
-            "Oc",
-            "No",
-            "De"
-          ],
-          series: [[542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]]
-        },
-        options: {
-          axisX: {
-            showGrid: false
-          },
-          low: 0,
-          high: 1000,
-          chartPadding: {
-            top: 0,
-            right: 5,
-            bottom: 0,
-            left: 0
-          }
-        },
-        responsiveOptions: [
-          [
-            "screen and (max-width: 640px)",
-            {
-              seriesBarDistance: 5,
-              axisX: {
-                labelInterpolationFnc: function(value) {
-                  return value[0];
-                }
-              }
-            }
-          ]
-        ]
       }
     };
   }
