@@ -1,7 +1,19 @@
 <template>
   <div class="md-layout">
 
+    <div class="md-layout-item md-size-100 md-layout">
 
+      <div class="md-layout-item md-size-50">
+
+        <!-- The Sign-in button. This will run `queryReports()` on success. -->
+        <p class="g-signin2" id="g-signin2" data-onsuccess="queryReports"></p>
+      </div>
+
+      <div class="md-layout-item md-size-50">
+        <!-- The API response will be printed here. -->
+        <textarea cols="80" rows="20" id="query-output"></textarea>
+      </div>
+    </div>
     <div class="md-layout-item md-size-50">
               <chart-card
           header-animation="false"
@@ -47,9 +59,8 @@
             </div>
             <p class="category">Website Visits</p>
             <h3 class="title">
-              <animated-number :value="75"></animated-number>.<animated-number
-                :value="521"
-              ></animated-number>
+              <animated-number :value="websiteVisits"></animated-number>
+              
             </h3>
           </template>
 
@@ -194,7 +205,13 @@
   </div>
 </template>
 
+
+
 <script>
+
+// Replace with your view ID.
+  var VIEW_ID = '202143083';
+
 import AsyncWorldMap from "@/components/WorldMap/AsyncWorldMap.vue";
 import {
   StatsCard,
@@ -216,8 +233,52 @@ export default {
     GlobalSalesTable,
     AsyncWorldMap
   },
+
+  methods:{ 
+    queryReports() {
+      gapi.client.request({
+        path: '/v4/reports:batchGet',
+        root: 'https://analyticsreporting.googleapis.com/',
+        method: 'POST',
+        body: {
+          reportRequests: [
+            {
+              viewId: VIEW_ID,
+              dateRanges: [
+                {
+                  startDate: '2019-09-20',
+                  endDate: 'today'
+                }
+              ],
+              metrics: [
+                {
+                  expression: 'ga:sessions'
+                },
+                {
+                  expression: 'ga:pageviews'
+                }
+              ]
+            }
+          ]
+        }
+      }).then(this.displayResults, console.error.bind(console));
+    },
+    displayResults(response) {
+      // var formattedJson = JSON.stringify(response.result, null, 2);
+      // console.log(response.result.reports[0].data)
+      this.websiteVisits = response.result.reports[0].data.rows[0].metrics[0].values[1]
+      console.log(this.websiteVisits)
+    }
+  },
+  async mounted(){
+    await gapi.signin2.render('g-signin2', { // this is the button "id"
+      onsuccess: this.queryReports // note, no "()" here
+    })
+
+  },
   data() {
     return {
+      websiteVisits: null,
       pieChart: {
         data: {
           labels: ["62%", "32%", "6%"],
@@ -227,9 +288,6 @@ export default {
           height: "230px"
         }
       },
-      product1: "./img/card-2.jpg",
-      product2: "./img/card-3.jpg",
-      product3: "./img/card-1.jpg",
       seq2: 0,
       mapData: {
         AU: 760,
