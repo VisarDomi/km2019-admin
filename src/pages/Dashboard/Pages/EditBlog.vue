@@ -266,7 +266,7 @@ let albumName = "Blogs"
       const file = files[0];
       const fileName = file.name;
 
-      const photoKey = this.albumPhotosKey + fileName;
+      const photoKey = albumPhotosKey + fileName;
       let vm = this;
       s3.upload(
         {
