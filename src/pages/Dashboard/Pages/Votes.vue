@@ -1,111 +1,97 @@
 <template>
   <div>
-    <div v-for="artist of this.getArtists">
+    <!-- <div v-for="artist of this.getArtists">
       <button @click="fetchVotes(artist.id)">Get Votes of {{artist.name}}</button>
     </div>
     <br />
     <div>Votes are {{votes}}</div>
-    <br />
+    <br />-->
 
+    <div class="md-layout">
+      <div class="md-layout-item">
+        <md-card>
+          <md-card-header class="md-card-header-icon md-card-header-green">
+            <div class="card-icon">
+              <md-icon>assignment</md-icon>
+            </div>
+            <h4 class="title">Paginated Tables</h4>
+          </md-card-header>
+          <md-card-content>
+            <md-table
+              :value="queriedData"
+              :md-sort.sync="currentSort"
+              :md-sort-order.sync="currentSortOrder"
+              :md-sort-fn="customSort"
+              class="paginated-table table-striped table-hover"
+            >
+              <md-table-toolbar>
+                <md-field>
+                  <label for="pages">Per page</label>
+                  <md-select v-model="pagination.perPage" name="pages">
+                    <md-option
+                      v-for="item in pagination.perPageOptions"
+                      :key="item"
+                      :label="item"
+                      :value="item"
+                    >{{ item }}</md-option>
+                  </md-select>
+                </md-field>
 
+                <md-field>
+                  <md-input
+                    type="search"
+                    class="mb-3"
+                    clearable
+                    style="width: 200px"
+                    placeholder="Search records"
+                    v-model="searchQuery"
+                  ></md-input>
+                </md-field>
+              </md-table-toolbar>
 
-  <div class="md-layout">
-    <div class="md-layout-item">
-      <md-card>
-        <md-card-header class="md-card-header-icon md-card-header-green">
-          <div class="card-icon">
-            <md-icon>assignment</md-icon>
-          </div>
-          <h4 class="title">Paginated Tables</h4>
-        </md-card-header>
-        <md-card-content>
-          <md-table
-            :value="queriedData"
-            :md-sort.sync="currentSort"
-            :md-sort-order.sync="currentSortOrder"
-            :md-sort-fn="customSort"
-            class="paginated-table table-striped table-hover"
-          >
-            <md-table-toolbar>
-              <md-field>
-                <label for="pages">Per page</label>
-                <md-select v-model="pagination.perPage" name="pages">
-                  <md-option
-                    v-for="item in pagination.perPageOptions"
-                    :key="item"
-                    :label="item"
-                    :value="item"
-                  >
-                    {{ item }}
-                  </md-option>
-                </md-select>
-              </md-field>
-
-              <md-field>
-                <md-input
-                  type="search"
-                  class="mb-3"
-                  clearable
-                  style="width: 200px"
-                  placeholder="Search records"
-                  v-model="searchQuery"
-                >
-                </md-input>
-              </md-field>
-            </md-table-toolbar>
-
-            <md-table-row slot="md-table-row" slot-scope="{ item }">
-              <md-table-cell md-label="Name" md-sort-by="name">{{
-                item.name
-              }}</md-table-cell>
-              <md-table-cell md-label="Video" >{{
-                item.video
-              }}</md-table-cell>
-              <md-table-cell md-label="Week" md-sort-by="week">{{ item.week }}</md-table-cell>
-              <md-table-cell md-label="Votes">{{ item.votes }}</md-table-cell>
-
-            </md-table-row>
-          </md-table>
-          <div class="footer-table md-table">
-            <table>
-              <tfoot>
-                <tr>
-                  <th
-                    v-for="item in footerTable"
-                    :key="item.name"
-                    class="md-table-head"
-                  >
-                    <div class="md-table-head-container md-ripple md-disabled">
-                      <div class="md-table-head-label">
-                        {{ item }}
+              <md-table-row slot="md-table-row" slot-scope="{ item }">
+                <md-table-cell md-label="Name" md-sort-by="name">
+                  {{
+                  item.name
+                  }}
+                </md-table-cell>
+                <md-table-cell md-label="Video">
+                  {{
+                  item.video
+                  }}
+                </md-table-cell>
+                <md-table-cell md-label="Week" md-sort-by="week">{{ item.week }}</md-table-cell>
+                <md-table-cell md-label="Votes">{{ item.votes }}</md-table-cell>
+              </md-table-row>
+            </md-table>
+            <div class="footer-table md-table">
+              <table>
+                <tfoot>
+                  <tr>
+                    <th v-for="item in footerTable" :key="item.name" class="md-table-head">
+                      <div class="md-table-head-container md-ripple md-disabled">
+                        <div class="md-table-head-label">{{ item }}</div>
                       </div>
-                    </div>
-                  </th>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-        </md-card-content>
-        <md-card-actions md-alignment="space-between">
-          <div class="">
-            <p class="card-category">
-              Showing {{ from + 1 }} to {{ to }} of {{ total }} entries
-            </p>
-          </div>
-          <pagination
-            class="pagination-no-border pagination-success"
-            v-model="pagination.currentPage"
-            :per-page="pagination.perPage"
-            :total="total"
-          >
-          </pagination>
-        </md-card-actions>
-      </md-card>
+                    </th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </md-card-content>
+          <md-card-actions md-alignment="space-between">
+            <div class>
+              <p class="card-category">Showing {{ from + 1 }} to {{ to }} of {{ total }} entries</p>
+            </div>
+            <pagination
+              class="pagination-no-border pagination-success"
+              v-model="pagination.currentPage"
+              :per-page="pagination.perPage"
+              :total="total"
+            ></pagination>
+          </md-card-actions>
+        </md-card>
+      </div>
     </div>
-  </div>
-
-
-  
   </div>
 </template>
 
@@ -127,7 +113,6 @@ export default {
       artists: [],
       votes: 0,
 
-
       currentSort: "week",
       currentSortOrder: "asc",
       pagination: {
@@ -142,15 +127,10 @@ export default {
       tableData: [],
       searchedData: [{}],
       fuseSearch: null
-
-
-
-
-
     };
   },
   methods: {
-        customSort(value) {
+    customSort(value) {
       return value.sort((a, b) => {
         const sortBy = this.currentSort;
         if (this.currentSortOrder === "desc") {
@@ -158,42 +138,42 @@ export default {
         }
         return b[sortBy].localeCompare(a[sortBy]);
       });
-    },
-    async fetchVotes(artistId) {
-      console.log("artistId", artistId);
-      const TableName = "KM2019-Vote";
-      const params = {
-        TableName,
-        artistId
-      };
-      await this.$store.dispatch(LIST_VOTE, params);
-
-      this.votes = this.getVotes.votes;
-      console.log("this.votes: ", this.votes)
-
-      let list_votes = [];
-      let list_ids = [];
-      for (let vote of this.getVotes) {
-        console.log("vote in for loop: ", vote)
-        list_votes.push(vote.votes);
-        list_ids.push(vote.artistId);
-      }
-      this.fetchArtistNames(list_votes, list_ids);
-    },
-    async fetchArtistNames(votes, ids) {
-      let i = 0;
-      for (let singleId of ids) {
-        const TableName = "KM2019-Artist";
-        const id = singleId;
-        const params = {
-          TableName,
-          id
-        };
-        await this.$store.dispatch(GET_ARTIST, params);
-        this.artists.push({ name: this.getArtist.name, votes: votes[i] });
-        i = i + 1;
-      }
     }
+    // async fetchVotes(artistId) {
+    //   console.log("artistId", artistId);
+    //   const TableName = "KM2019-Vote";
+    //   const params = {
+    //     TableName,
+    //     artistId
+    //   };
+    //   await this.$store.dispatch(LIST_VOTE, params);
+
+    //   this.votes = this.getVotes.votes;
+    //   console.log("this.votes: ", this.votes)
+
+    //   let list_votes = [];
+    //   let list_ids = [];
+    //   for (let vote of this.getVotes) {
+    //     console.log("vote in for loop: ", vote)
+    //     list_votes.push(vote.votes);
+    //     list_ids.push(vote.artistId);
+    //   }
+    //   this.fetchArtistNames(list_votes, list_ids);
+    // },
+    // async fetchArtistNames(votes, ids) {
+    //   let i = 0;
+    //   for (let singleId of ids) {
+    //     const TableName = "KM2019-Artist";
+    //     const id = singleId;
+    //     const params = {
+    //       TableName,
+    //       id
+    //     };
+    //     await this.$store.dispatch(GET_ARTIST, params);
+    //     this.artists.push({ name: this.getArtist.name, votes: votes[i] });
+    //     i = i + 1;
+    //   }
+    // }
   },
   computed: {
     /***
@@ -224,10 +204,9 @@ export default {
     ...mapGetters(["getVotes", "getArtist", "getArtists"])
   },
   async mounted() {
-
     console.log("mounted table data: ", this.tableData);
 
-        // Fuse search initialization.
+    // Fuse search initialization.
     this.fuseSearch = new Fuse(this.tableData, {
       keys: ["name", "week"],
       threshold: 0.3
@@ -236,7 +215,8 @@ export default {
     const TableName = "KM2019-Artist";
     const params = {
       TableName,
-      Limit: 100
+      Limit: 100,
+      Votes: "yes"
     };
     await this.$store.dispatch(LIST_ARTIST, params);
     this.tableData = this.getArtists;
@@ -245,7 +225,7 @@ export default {
     console.log("after mounted table data: ", this.tableData);
   },
 
-    watch: {
+  watch: {
     /**
      * Searches through the table data by a given query.
      * NOTE: If you have a lot of data, it's recommended to do the search on the Server Side and only display the results here.
@@ -257,7 +237,6 @@ export default {
         result = this.fuseSearch.search(this.searchQuery);
       }
       this.searchedData = result;
-
     }
   }
 };
