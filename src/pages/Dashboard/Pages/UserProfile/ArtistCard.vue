@@ -7,23 +7,16 @@
     <md-card-content>
       <h6 class="category text-gray">Artist</h6>
       <h4 class="card-title">{{name}}</h4>
-      <p class="card-description">
-        {{description}}
+      <p class="card-description">{{description}}</p>
+      <p class="card-video">
+        <a :href="video">{{video}}</a>
       </p>
-      <p class="card-description">
-       <a href="https://www.youtube.com/watch?v=i8Zi1DM7iR4">https://www.youtube.com/watch?v=i8Zi1DM7iR4</a> 
-      </p>
-      <md-button class="md-round" :class="getColorButton(buttonColor)"
-        >View</md-button
-      >
-      <md-button class="md-round md-danger"
-        >Delete</md-button
-      >
-      <br>
+      <md-button class="md-round" :class="getColorButton(buttonColor)" @click="editArtist(artistId)">Edit</md-button>
+      <md-button class="md-round md-danger">Delete</md-button>
+      <br />
       <md-checkbox v-model="shownHome" value="1">Show on home screen</md-checkbox>
     </md-card-content>
   </md-card>
-
 </template>
 <script>
 export default {
@@ -38,16 +31,22 @@ export default {
       default: ""
     },
     name: "",
-    description: ""
+    description: "",
+    video: "",
+    artistId: ""
   },
   data() {
     return {
-      shownHome: [],
+      shownHome: []
     };
   },
   methods: {
     getColorButton: function(buttonColor) {
       return "md-" + buttonColor + "";
+    },
+    async editArtist(artistId) {
+      console.log("now should route to edit artist")
+      console.log("artistId", artistId)
     }
   }
 };

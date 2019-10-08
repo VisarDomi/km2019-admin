@@ -1,17 +1,13 @@
 <template>
-<div>
-
+  <div>
     <div class="md-layout">
       <div class="md-layout-item" style="margin-bottom:5rem;">
         <md-button class="md-success" @click="addBlog()">Add new blog post...</md-button>
       </div>
     </div>
 
-
-  <div class="md-layout">
-
-
-<!-- soon replace below div with 
+    <div class="md-layout">
+      <!-- soon replace below div with 
 
 
       <div
@@ -60,40 +56,32 @@
               <strong>Visible on home page</strong>
             </h4>
           </div>
-        </template>
-      </product-card>
+
+          </template>
+        </product-card>
+      </div>
     </div>
-
-  </div>
-
-
   </div>
 </template>
 
 <script>
-
-
 import { LIST_BLOGS } from "@/store/actions.type";
 import { mapGetters } from "vuex";
 
-
-import {
-  ProductCard,
-} from "@/components";
+import { ProductCard } from "@/components";
 
 export default {
   name: "Blog",
   components: {
-    ProductCard,
+    ProductCard
   },
   data() {
     return {
-      blogs: [],
-
+      blogs: []
     };
   },
-  methods:{
-    addBlog(){
+  methods: {
+    addBlog() {
       this.$router.push({ name: "CreateBlog" });
     },
     goToBlog(blog) {
@@ -113,16 +101,15 @@ export default {
       await this.$store.dispatch(LIST_BLOGS, params);
 
       for (let blog of this.getBlogs) {
-          this.blogs.push(blog);
+        this.blogs.push(blog);
       }
-      this.blogs.sort((a, b) => b.ordering - a.ordering)
-
+      this.blogs.sort((a, b) => b.ordering - a.ordering);
     }
   },
-    async mounted() {
+  async mounted() {
     await this.fetchBlogs();
   },
-    computed: {
+  computed: {
     ...mapGetters(["getBlogs"])
   }
 };
