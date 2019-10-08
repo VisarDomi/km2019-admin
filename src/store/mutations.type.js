@@ -14,3 +14,6 @@ export const SET_ALBUM = "setAlbum";
 export const SET_ALBUM_FILES = "setAlbumFiles";
 
 export const SET_VOTES = "setVotes";
+
+export const SET_BLOGS = "setBlogs";
+export const SET_BLOG = "setBlog";

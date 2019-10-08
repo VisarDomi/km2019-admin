@@ -14,7 +14,7 @@
             <div class="card-icon">
               <md-icon>assignment</md-icon>
             </div>
-            <h4 class="title">Paginated Tables</h4>
+            <h4 class="title">Artist votes</h4>
           </md-card-header>
           <md-card-content>
             <md-table

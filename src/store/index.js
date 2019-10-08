@@ -4,6 +4,7 @@ import loading from "./modules/loading";
 import artist from "./modules/artist";
 import vote from "./modules/vote";
 import album from "./modules/album";
+import blog from "./modules/blog";
 import { ApiService } from "./services/api";
 import { PUT, DELETE } from "./actions.type";
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     loading,
     artist,
     vote,
+    blog,
     album
   },
   actions: {
