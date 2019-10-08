@@ -30,8 +30,8 @@
           <md-icon>art_track</md-icon>
           <md-tooltip md-direction="bottom">View</md-tooltip>
         </template>
-        <template slot="second-button">
-          <md-icon>edit</md-icon>
+        <template slot="second-button" >
+          <md-icon >edit</md-icon>
           <md-tooltip md-direction="bottom">Edit</md-tooltip>
         </template>
         <template slot="third-button">
@@ -39,9 +39,9 @@
           <md-tooltip md-direction="bottom">Remove</md-tooltip>
         </template>
         <h4 slot="title" class="title">
-          <a href="#pablo">{{blog.title}}</a>
+          <a href="#" @click="goToBlog(blog)">{{blog.title}}</a>
           <br>
-          <a href="#pablo">{{blog.titleEn}}</a>
+          <a href="#" @click="goToBlog(blog)">{{blog.titleEn}}</a>
         </h4>
         <div slot="description" class="card-description">
           {{blog.body.substring(0, 80)}}
@@ -52,9 +52,12 @@
           <div class="price">
             <h4>{{blog.date}}</h4>
           </div>
+          <div class="price">
+            <h4>{{blog.ordering}}</h4>
+          </div>
           <div class="stats">
             <h4 class="category" v-if="blog.isMainHome">
-              <strong>Duket ne home page</strong>
+              <strong>Visible on home page</strong>
             </h4>
           </div>
         </template>
@@ -94,9 +97,9 @@ export default {
       this.$router.push({ name: "CreateBlog" });
     },
     goToBlog(blog) {
-      // this.$router.push({ name: blog.title });
+      console.log("clicking...")
       this.$router.push({
-        name: "SingleBlog",
+        name: "EditBlog",
         params: { title: blog.title, id: blog.id}
       });
     },
