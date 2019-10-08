@@ -12,6 +12,8 @@ export const SET_ALBUM = "setAlbum";
 
 // photos
 export const SET_ALBUM_FILES = "setAlbumFiles";
+export const SET_HOME_IMAGE = "setHomeImage";
+export const SET_BLOG_IMAGE = "setBlogImage";
 
 export const SET_VOTES = "setVotes";
 

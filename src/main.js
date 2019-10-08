@@ -40,8 +40,12 @@ ApiService.init();
 
 // configure router
 const router = new VueRouter({
+  mode: "history",
   routes, // short for routes: routes
-  linkExactActiveClass: "nav-item active"
+  linkExactActiveClass: "nav-item active",
+  scrollBehavior() {
+    return {x: 0, y: 0}
+}
 });
 
 // global library setup

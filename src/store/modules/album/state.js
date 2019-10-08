@@ -1,5 +1,6 @@
 export const state = {
   albums: [],
   album: "",
-  albumFiles: []
+  homeFiles: [],
+  blogFiles: []
 };
