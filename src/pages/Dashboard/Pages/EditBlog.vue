@@ -103,7 +103,7 @@
 
               <label class="md-layout-item md-size-15 md-form-label">Home Display Image</label>
               <div class="md-layout-item">
-                <img :src="this.getBlog.filterImg" alt="" style="width:20rem;">
+                <img :src="this.filterImg" alt="" style="width:20rem;" :key="this.filterImg">
               </div>
             </div>
 
@@ -124,7 +124,7 @@
 
               <label class="md-layout-item md-size-15 md-form-label">Blog Display Image</label>
               <div class="md-layout-item">
-                <img :src="this.getBlog.img" alt="" style="width:20rem;">
+                <img :src="this.img" alt="" style="width:20rem;" :key="this.img">
               </div>
             </div>
           </div>
@@ -403,7 +403,14 @@ let albumName = "Blogs"
 
   },
   computed: {
-    ...mapGetters(["getBlog"])
+    ...mapGetters(["getBlog"]),
+
+    getBlogImage: function() {
+    	return this.img;
+    },
+    getHomeImage: function(){
+      return this.filterImg;
+    }
   },
     async mounted() {
       
