@@ -5,16 +5,18 @@
     </div>
 
     <md-card-content>
-      <h6 class="category text-gray">Artist</h6>
+      <h6 class="category text-gray">Artist - Week {{week}}</h6>
       <h4 class="card-title">{{name}}</h4>
       <p class="card-description">{{description}}</p>
+      <br>
+      <p class="card-description">{{descriptionEng}}</p>
       <p class="card-video">
         <a :href="video">{{video}}</a>
       </p>
       <md-button class="md-round" :class="getColorButton(buttonColor)" @click="editArtist(artistId)">Edit</md-button>
       <md-button class="md-round md-danger">Delete</md-button>
       <br />
-      <md-checkbox v-model="shownHome" value="1">Show on home screen</md-checkbox>
+      <md-checkbox v-model="home" >Show on home screen</md-checkbox>
     </md-card-content>
   </md-card>
 </template>
@@ -32,6 +34,9 @@ export default {
     },
     name: "",
     description: "",
+    descriptionEng: "",
+    home: "",
+    week: "",
     video: "",
     artistId: ""
   },
