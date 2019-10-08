@@ -85,7 +85,8 @@
               </div>
             </div>
 
-            <div class="md-layout" style="margin-top:30px;">
+        <div class="md-layout">
+            <div class="md-layout md-layout-item md-size-50" style="margin-top:30px;">
               <label class="md-layout-item md-size-15 md-form-label">Home Display Image (color scaled)</label>
               <div class="md-layout-item">
                   <md-field>
@@ -99,16 +100,14 @@
                   </md-field>
                   <md-button class="md-success" @click="updateHomeDisplay()">Update Home Display</md-button>
               </div>
-            </div>
 
-            <div class="md-layout">
               <label class="md-layout-item md-size-15 md-form-label">Home Display Image</label>
               <div class="md-layout-item">
                 <img :src="this.getBlog.filterImg" alt="" style="width:20rem;">
               </div>
             </div>
 
-            <div class="md-layout" style="margin-top:30px;">
+            <div class="md-layout md-layout-item md-size-50" style="margin-top:30px;">
               <label class="md-layout-item md-size-15 md-form-label">Blog Display Image</label>
               <div class="md-layout-item">
                   <md-field>
@@ -122,14 +121,13 @@
                   </md-field>
                   <md-button class="md-success" @click="updateBlogDisplay()">Update Blog Display</md-button>
               </div>
-            </div>
 
-            <div class="md-layout">
               <label class="md-layout-item md-size-15 md-form-label">Blog Display Image</label>
               <div class="md-layout-item">
                 <img :src="this.getBlog.img" alt="" style="width:20rem;">
               </div>
             </div>
+          </div>
 
             <div class="md-layout" style="margin-top:50px;">
               <div class="md-layout-item mx-auto md-size-30">
