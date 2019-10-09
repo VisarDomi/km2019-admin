@@ -26,10 +26,7 @@
           :link="{ name: 'Artists', icon: 'mic', path: '/artists' }"
         >
         </sidebar-item>
-        <sidebar-item
-          :link="{ name: 'Submissions', icon: 'photo_library', path: '/submissions' }"
-        >
-        </sidebar-item>      
+ 
         <sidebar-item
           :link="{ name: 'Votes', icon: 'poll', path: '/votes' }"
         >
