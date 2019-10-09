@@ -85,7 +85,7 @@ export default {
       this.$router.push({ name: "CreateBlog" });
     },
     goToBlog(blog) {
-      console.log("clicking...")
+      
       this.$router.push({
         name: "EditBlog",
         params: { title: blog.title, id: blog.id}

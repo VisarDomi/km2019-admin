@@ -5,6 +5,7 @@ import Dashboard from "@/pages/Dashboard/Dashboard.vue";
 import Blog from "@/pages/Dashboard/Pages/Blog.vue";
 import CreateBlog from "@/pages/Dashboard/Pages/CreateBlog.vue";
 import EditBlog from "@/pages/Dashboard/Pages/EditBlog.vue";
+import EditArtist from "@/pages/Dashboard/Pages/EditArtist.vue";
 import Artists from "@/pages/Dashboard/Pages/Artists.vue";
 import CreateArtist from "@/pages/Dashboard/Pages/CreateArtist.vue";
 import Submissions from "@/pages/Dashboard/Pages/Submissions.vue";
@@ -47,6 +48,12 @@ export const admin = {
       name: "Artists",
       components: { default: Artists },
       meta: setMeta("Artists")
+    },
+    {
+      path: "artist/:id",
+      name: "EditArtist",
+      components: { default: EditArtist },
+      meta: setMeta("Artist Detail")
     },
     {
       path: "createartist",

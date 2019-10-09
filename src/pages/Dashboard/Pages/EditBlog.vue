@@ -254,7 +254,7 @@ export default {
     },
     updateHomeDisplay(){
 
-let albumName = "Blogs"
+    let albumName = "Blogs"
       let albumPhotosKey = encodeURIComponent(albumName) + "//"
 
 

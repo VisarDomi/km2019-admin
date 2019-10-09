@@ -11,7 +11,7 @@
     <div class="md-layout">
 
       <div class="md-layout-item md-medium-size-100 md-size-20" v-for="artist of this.artists">
-        <artist-card button-color="success" :artistId="artist.id" :video="artist.video" :cardUserImage="artist.img" :name="artist.name" :home="artist.isCurrentWeek" :week="artist.week" :descriptionEng="artist.bioEng.substring(0,80)" :description="artist.bio.substring(0, 80)"> </artist-card>
+        <artist-card  button-color="success" :artistId="artist.id" :video="artist.video" :cardUserImage="artist.img" :name="artist.name" :home="artist.isCurrentWeek" :week="artist.week" :descriptionEng="artist.bioEng.substring(0,80)" :description="artist.bio.substring(0, 80)"> </artist-card>
       </div>
     </div>
   </div>
@@ -33,6 +33,10 @@ export default {
     };
   },
   methods:{
+    goToArtist(artist) {
+      
+
+    },
     addArtist(){
       this.$router.push({ name: "CreateArtist" });
     },

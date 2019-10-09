@@ -50,8 +50,11 @@ export default {
       return "md-" + buttonColor + "";
     },
     async editArtist(artistId) {
-      console.log("now should route to edit artist")
-      console.log("artistId", artistId)
+
+      this.$router.push({
+        name: "EditArtist",
+        params: {  id: artistId}
+      });
     }
   }
 };
