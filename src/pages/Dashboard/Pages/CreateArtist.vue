@@ -191,7 +191,7 @@ export default {
       profileImg: "",
       backgroundImg: "",
       ordering: "",
-      isCurrentWeek: ""
+      isCurrentWeek: false
     };
   },
   methods:{

@@ -16,7 +16,8 @@
       <md-button class="md-round" :class="getColorButton(buttonColor)" @click="editArtist(artistId)">Edit</md-button>
       <md-button class="md-round md-danger">Delete</md-button>
       <br />
-      <md-checkbox v-model="home" >Show on home screen</md-checkbox>
+      <!-- <md-checkbox v-model="home" >Show on home screen</md-checkbox> -->
+      <h4 v-if="home"><b> Shown on homescreen</b></h4>
     </md-card-content>
   </md-card>
 </template>

@@ -61,7 +61,7 @@
                   }}
                 </md-table-cell>
                 <md-table-cell md-label="Week" md-sort-by="week">{{ item.week }}</md-table-cell>
-                <md-table-cell md-label="Votes">{{ item.votes }}</md-table-cell>
+                <md-table-cell md-label="Votes" md-sort-by="votes">{{ item.votes }}</md-table-cell>
               </md-table-row>
             </md-table>
             <div class="footer-table md-table">
@@ -132,11 +132,33 @@ export default {
   methods: {
     customSort(value) {
       return value.sort((a, b) => {
+
         const sortBy = this.currentSort;
         if (this.currentSortOrder === "desc") {
-          return a[sortBy].localeCompare(b[sortBy]);
+          // return a[sortBy].localeCompare(b[sortBy]);
+          console.log("->",a[sortBy] > b[sortBy])
+          console.log("a->",a[sortBy] )
+          console.log("b->",b[sortBy])
+          if(a[sortBy] > b[sortBy]){
+            return -1;
+          } else if (a[sortBy] < b[sortBy]){
+            return 1;
+          } else {
+            return 0;
+          }
+
+          
         }
-        return b[sortBy].localeCompare(a[sortBy]);
+
+
+        if(a[sortBy] > b[sortBy]){
+            return 1;
+          } else if (a[sortBy] < b[sortBy]){
+            return -1;
+          } else {
+            return 0;
+          }
+
       });
     }
     // async fetchVotes(artistId) {
@@ -208,7 +230,7 @@ export default {
 
     // Fuse search initialization.
     this.fuseSearch = new Fuse(this.tableData, {
-      keys: ["name", "week"],
+      keys: ["name", "week", "votes"],
       threshold: 0.3
     });
 

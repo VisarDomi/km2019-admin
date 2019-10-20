@@ -66,6 +66,28 @@
             </div>
 
             <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Contains video? </label>
+              <div class="md-layout-item">
+                <md-field>
+
+                  <md-checkbox v-model="containsVideo" ></md-checkbox>
+                </md-field>
+              </div>
+            </div>
+
+            <div class="md-layout" v-if="containsVideo">
+              <label class="md-layout-item md-size-15 md-form-label">Video link</label>
+              <div class="md-layout-item">
+                <md-field>
+                  <label>Video link</label>
+                  <md-input v-model="videoLink" placeholder="https://www.youtube.com/embed/a-YsVQSK_Uo"></md-input>
+                </md-field>
+              </div>
+            </div>
+
+
+
+            <div class="md-layout">
               <label class="md-layout-item md-size-15 md-form-label">Body</label>
               <div class="md-layout-item">
                 <md-field>
@@ -170,7 +192,9 @@ export default {
       img: "",
       filterImg: "",
       ordering: "",
-      isMainHome: ""
+      isMainHome: false,
+      containsVideo: false,
+      videoLink: ""
     };
   },
   methods:{
@@ -192,6 +216,8 @@ export default {
       this.filterImg = this.getBlog.filterImg;
       this.ordering = this.getBlog.ordering;
       this.isMainHome = this.getBlog.isMainHome;
+      this.containsVideo = this.getBlog.containsVideo;
+      this.videoLink = this.getBlog.videoLink;
       this.$store.commit(STOP_LOADING);
       window.scrollTo(0,0);
     },
@@ -301,6 +327,13 @@ export default {
 
       const TableName = "KM2019-Blog";
 
+      let blogImg = this.getBlog.img;
+
+
+      if(this.getBlog.img != this.img){
+        blogImg = this.img
+      }
+
 
       let blog = {
           TableName,
@@ -312,77 +345,10 @@ export default {
           bodyEn: this.bodyEn,
           ordering: this.ordering,
           isMainHome: this.isMainHome,
-          img: this.getBlog.img,
-          filterImg: this.getBlog.filterImg
+          containsVideo: this.containsVideo,
+          videoLink: this.videoLink,
+          img: blogImg
         };
-
-      if(this.img != this.getBlog.img){
-        blog = {
-          TableName,
-          id: this.blogId,
-          title: this.title,
-          titleEn: this.titleEn,
-          date: this.date,
-          body: this.body,
-          bodyEn: this.bodyEn,
-          ordering: this.ordering,
-          isMainHome: this.isMainHome,
-          img: this.img,
-          filterImg: this.getBlog.filterImg
-        };
-      }
-
-      if(this.filterImg != this.getBlog.filterImg){
-        blog = {
-          TableName,
-          id: this.blogId,
-          title: this.title,
-          titleEn: this.titleEn,
-          date: this.date,
-          body: this.body,
-          bodyEn: this.bodyEn,
-          ordering: this.ordering,
-          isMainHome: this.isMainHome,
-          img: this.getBlog.img,
-          filterImg: this.filterImg
-        };
-      }
-
-      if(this.filterImg != this.getBlog.filterImg && this.img != this.getBlog.img){
-                blog = {
-          TableName,
-          id: this.blogId,
-          title: this.title,
-          titleEn: this.titleEn,
-          date: this.date,
-          body: this.body,
-          bodyEn: this.bodyEn,
-          ordering: this.ordering,
-          isMainHome: this.isMainHome,
-          img: this.img,
-          filterImg: this.filterImg
-        };
-      }
-
-
-
-      
-
-
-
-      // let blog = {
-      //   TableName,
-      //   id: this.blogId,
-      //   title: this.title,
-      //   titleEn: this.titleEn,
-      //   date: this.date,
-      //   body: this.body,
-      //   bodyEn: this.bodyEn,
-      //   ordering: this.ordering,
-      //   isMainHome: this.isMainHome,
-      //   img: this.getBlog.img,
-      //   filterImg: this.getBlog.filterImg
-      // };
 
 
       this.$store.commit(START_LOADING);
@@ -391,15 +357,9 @@ export default {
       
 
 
-
-
-
       this.$router.push({ name: "Blog" });
 
     }
-
-
-
 
   },
   computed: {

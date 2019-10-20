@@ -65,6 +65,27 @@
               </div>
             </div>
 
+
+            <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Contains video? </label>
+              <div class="md-layout-item">
+                <md-field>
+
+                  <md-checkbox v-model="containsVideo" ></md-checkbox>
+                </md-field>
+              </div>
+            </div>
+
+            <div class="md-layout" v-if="containsVideo">
+              <label class="md-layout-item md-size-15 md-form-label">Video link</label>
+              <div class="md-layout-item">
+                <md-field>
+                  <label>Video link</label>
+                  <md-input v-model="videoLink" placeholder="https://www.youtube.com/embed/a-YsVQSK_Uo"></md-input>
+                </md-field>
+              </div>
+            </div>
+
             <div class="md-layout">
               <label class="md-layout-item md-size-15 md-form-label">Body</label>
               <div class="md-layout-item">
@@ -86,26 +107,6 @@
             </div>
 
         <div class="md-layout">
-            <div class="md-layout md-layout-item md-size-50" style="margin-top:30px;">
-              <label class="md-layout-item md-size-15 md-form-label">Home Display Image (color scaled)</label>
-              <div class="md-layout-item">
-                  <md-field>
-                    <input
-                      type="file"
-                      ref="imgHome"
-                      :id="'imgHome'"
-                      accept="image/*"
-                      @change="handleMainUpload()"
-                    />
-                  </md-field>
-                  <md-button class="md-success" @click="updateHomeDisplay()">Update Home Display</md-button>
-              </div>
-
-              <label class="md-layout-item md-size-15 md-form-label">Home Display Image</label>
-              <div class="md-layout-item">
-                <img :src="this.filterImg" alt="" style="width:20rem;" :key="this.filterImg">
-              </div>
-            </div>
 
             <div class="md-layout md-layout-item md-size-50" style="margin-top:30px;">
               <label class="md-layout-item md-size-15 md-form-label">Blog Display Image</label>
@@ -165,9 +166,10 @@ export default {
       body: "",
       bodyEn: "",
       img: "",
-      filterImg: "",
       ordering: "",
-      isMainHome: ""
+      isMainHome: false,
+      containsVideo: false,
+      videoLink: "nan"
     };
   },
   methods:{
@@ -289,10 +291,11 @@ export default {
           ordering: this.ordering,
           isMainHome: this.isMainHome,
           img: this.img,
-          filterImg: this.filterImg
+          containsVideo: this.containsVideo,
+          videoLink: this.videoLink
         };
 
-
+      console.log("will send: ", blog)
       this.$store.commit(START_LOADING);
       await this.$store.dispatch(PUT, blog);
       this.$store.commit(STOP_LOADING);

@@ -313,44 +313,17 @@ export default {
 
 
       const TableName = "KM2019-Artist";
-
-
-      let artist = {
-          TableName,
-          id: this.artistId,
-          name: this.name,
-          song: this.song,
-          songEng: this.songEng,
-          video: this.video,
-          week: this.week,
-          bio: this.bio,
-          bioEng: this.bioEng,
-          ordering: this.ordering,
-          isCurrentWeek: this.isCurrentWeek,
-          img: this.getArtist.img,
-          bgImg: this.getArtist.bgImg
-        };
-
+      let backgroundImage = this.getArtist.bgImg;
+      let profileImage = this.getArtist.img;
 
       if(this.profileImg != this.getArtist.img){
-      let artist = {
-          TableName,
-          id: this.artistId,
-          name: this.name,
-          song: this.song,
-          songEng: this.songEng,
-          video: this.video,
-          week: this.week,
-          bio: this.bio,
-          bioEng: this.bioEng,
-          ordering: this.ordering,
-          isCurrentWeek: this.isCurrentWeek,
-          img: this.profileImg,
-          bgImg: this.getArtist.bgImg
-        };
+        profileImage = this.profileImg;
       }
 
       if(this.backgroundImg != this.getArtist.bgImg){
+        backgroundImage = this.backgroundImg;
+      }
+
       let artist = {
           TableName,
           id: this.artistId,
@@ -363,30 +336,13 @@ export default {
           bioEng: this.bioEng,
           ordering: this.ordering,
           isCurrentWeek: this.isCurrentWeek,
-          img: this.getArtist.img,
-          bgImg: this.backgroundImg
+          img: profileImage,
+          bgImg: backgroundImage
         };
-      }
-
-      if(this.profileImg != this.getArtist.img && this.backgroundImg != this.getArtist.bgImg){
-      let artist = {
-          TableName,
-          id: this.artistId,
-          song: this.song,
-          songEng: this.songEng,
-          video: this.video,
-          week: this.week,
-          bio: this.bio,
-          bioEng: this.bioEng,
-          ordering: this.ordering,
-          isCurrentWeek: this.isCurrentWeek,
-          img: this.profileImg,
-          bgImg: this.backgroundImg
-        };
-      }
 
 
       this.$store.commit(START_LOADING);
+      console.log("sending: ", artist)
       await this.$store.dispatch(PUT, artist);
       this.$store.commit(STOP_LOADING);
 
