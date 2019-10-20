@@ -7,6 +7,7 @@ export const LIST_ARTIST = "listArtist"
 export const GET_ARTIST = "getArtist"
 
 export const LIST_VOTE = "listVote"
+export const LIST_TOTAL_VOTES = "listTotalVotes"
 
 export const LIST_BLOGS = "listBlogs";
 export const GET_BLOG = "getBlog";

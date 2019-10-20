@@ -64,8 +64,7 @@
             </div>
             <p class="category">Votes</p>
             <h3 class="title">
-              <animated-number :value="34"></animated-number>,
-              <animated-number :value="245"></animated-number>
+              <animated-number :value="getTotalVotes"></animated-number>
             </h3>
           </template>
 
@@ -78,24 +77,24 @@
         </stats-card>
       </div>
 
-          <div class="md-layout-item md-size-100">
-      <global-sales-card header-color="green">
-        <template slot="header">
-          <div class="card-icon">
-            <md-icon>language</md-icon>
-          </div>
-          <h4 class="title">Website views by locations</h4>
-        </template>
-
-        <template slot="content">
-          <div class="md-layout">
-            <div class="md-layout-item md-size-100">
-              <global-sales-table :countryData="this.countryData" v-if="loaded"></global-sales-table>
+      <div class="md-layout-item md-size-100">
+        <global-sales-card header-color="green">
+          <template slot="header">
+            <div class="card-icon">
+              <md-icon>language</md-icon>
             </div>
-          </div>
-        </template>
-      </global-sales-card>
-    </div>
+            <h4 class="title">Website views by locations</h4>
+          </template>
+
+          <template slot="content">
+            <div class="md-layout">
+              <div class="md-layout-item md-size-100">
+                <global-sales-table :countryData="this.countryData" v-if="loaded"></global-sales-table>
+              </div>
+            </div>
+          </template>
+        </global-sales-card>
+      </div>
 
       <!-- <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
         <chart-card
@@ -128,7 +127,7 @@
             </div>
           </template>
         </chart-card>
-      </div> -->
+      </div>-->
     </div>
 
     <!-- <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50">
@@ -161,8 +160,7 @@
           </div>
         </template>
       </chart-card>
-    </div> -->
-
+    </div>-->
 
     <div class="md-layout-item md-size-100 h-55">
       <async-world-map class="map" :data="mapData" v-if="loaded"></async-world-map>
@@ -185,6 +183,8 @@ import {
   GlobalSalesCard,
   GlobalSalesTable
 } from "@/components";
+import { LIST_TOTAL_VOTES } from "@/store/actions.type"
+import { mapGetters } from 'vuex';
 
 export default {
   name: "Dashboard",
@@ -196,6 +196,9 @@ export default {
     GlobalSalesCard,
     GlobalSalesTable,
     AsyncWorldMap
+  },
+  computed: {
+    ...mapGetters(["getTotalVotes"])
   },
 
   methods: {
@@ -252,20 +255,19 @@ export default {
           }
         })
         .then(this.displayResults, console.error.bind(console));
-
     },
     displayResults(response) {
       this.loaded = false;
-      console.log(response)
+      console.log(response);
 
       this.websiteVisits = response.result.reports[0].data.totals[0].values[0];
-      
+
       this.desktopVisits =
         response.result.reports[0].data.rows[0].metrics[0].values[0];
-      
+
       this.mobileVisits =
         response.result.reports[0].data.rows[1].metrics[0].values[0];
-      
+
       this.tabletVisits =
         response.result.reports[0].data.rows[2].metrics[0].values[0];
 
@@ -285,9 +287,6 @@ export default {
       this.pieChart.data.series.push(this.mobileVisits);
       this.pieChart.data.series.push(this.tabletVisits);
 
-
-
-
       let isoCode1 = response.result.reports[1].data.rows[0].dimensions[0];
       let isoCode2 = response.result.reports[1].data.rows[1].dimensions[0];
       let isoCode3 = response.result.reports[1].data.rows[2].dimensions[0];
@@ -295,68 +294,75 @@ export default {
       let isoCode5 = response.result.reports[1].data.rows[4].dimensions[0];
       let isoCode6 = response.result.reports[1].data.rows[5].dimensions[0];
 
-      let pageviews1 = response.result.reports[1].data.rows[0].metrics[0].values[0];
-      let pageviews2 = response.result.reports[1].data.rows[1].metrics[0].values[0];
-      let pageviews3 = response.result.reports[1].data.rows[2].metrics[0].values[0];
-      let pageviews4 = response.result.reports[1].data.rows[3].metrics[0].values[0];
-      let pageviews5 = response.result.reports[1].data.rows[4].metrics[0].values[0];
-      let pageviews6 = response.result.reports[1].data.rows[5].metrics[0].values[0];
+      let pageviews1 =
+        response.result.reports[1].data.rows[0].metrics[0].values[0];
+      let pageviews2 =
+        response.result.reports[1].data.rows[1].metrics[0].values[0];
+      let pageviews3 =
+        response.result.reports[1].data.rows[2].metrics[0].values[0];
+      let pageviews4 =
+        response.result.reports[1].data.rows[3].metrics[0].values[0];
+      let pageviews5 =
+        response.result.reports[1].data.rows[4].metrics[0].values[0];
+      let pageviews6 =
+        response.result.reports[1].data.rows[5].metrics[0].values[0];
 
       this.mapData = {
-        [isoCode1]: pageviews1, 
-        [isoCode2]: pageviews2, 
-        [isoCode3]: pageviews3, 
-        [isoCode4]: pageviews4, 
-        [isoCode5]: pageviews5, 
-        [isoCode6]: pageviews6, 
-      }
+        [isoCode1]: pageviews1,
+        [isoCode2]: pageviews2,
+        [isoCode3]: pageviews3,
+        [isoCode4]: pageviews4,
+        [isoCode5]: pageviews5,
+        [isoCode6]: pageviews6
+      };
 
       this.countryData = [
         {
-          flag: "./img/flags/"+isoCode1+".png",
+          flag: "./img/flags/" + isoCode1 + ".png",
           country: isoCode1,
           sales: pageviews1,
           percent: Math.ceil((pageviews1 / this.websiteVisits) * 100) + "%"
         },
         {
-          flag: "./img/flags/"+isoCode2+".png",
+          flag: "./img/flags/" + isoCode2 + ".png",
           country: isoCode2,
           sales: pageviews2,
           percent: Math.ceil((pageviews2 / this.websiteVisits) * 100) + "%"
         },
         {
-          flag: "./img/flags/"+isoCode3+".png",
+          flag: "./img/flags/" + isoCode3 + ".png",
           country: isoCode3,
           sales: pageviews3,
           percent: Math.ceil((pageviews3 / this.websiteVisits) * 100) + "%"
-        },        
+        },
         {
-          flag: "./img/flags/"+isoCode4+".png",
+          flag: "./img/flags/" + isoCode4 + ".png",
           country: isoCode4,
           sales: pageviews4,
           percent: Math.ceil((pageviews4 / this.websiteVisits) * 100) + "%"
         },
         {
-          flag: "./img/flags/"+isoCode5+".png",
+          flag: "./img/flags/" + isoCode5 + ".png",
           country: isoCode5,
           sales: pageviews5,
           percent: Math.ceil((pageviews5 / this.websiteVisits) * 100) + "%"
         },
         {
-          flag: "./img/flags/"+isoCode6+".png",
+          flag: "./img/flags/" + isoCode6 + ".png",
           country: isoCode6,
           sales: pageviews6,
           percent: Math.ceil((pageviews6 / this.websiteVisits) * 100) + "%"
-        },
-      ]
+        }
+      ];
 
-      console.log(this.mapData, "this.mapDAta")
-      console.log(this.countryData, "this.countryData")
+      console.log(this.mapData, "this.mapDAta");
+      console.log(this.countryData, "this.countryData");
 
       this.loaded = true;
     }
   },
   async mounted() {
+    await this.$store.dispatch(LIST_TOTAL_VOTES)
     await gapi.signin2.render("g-signin2", {
       // this is the button "id"
       onsuccess: this.queryReports // note, no "()" here
@@ -364,15 +370,14 @@ export default {
   },
   data() {
     return {
+      totalVotes: 0,
       countryData: null,
       loaded: false,
       websiteVisits: 0,
       desktopVisits: 0,
       mobileVisits: 0,
       tabletVisits: 0,
-      countryVisits: [
-
-      ],
+      countryVisits: [],
       pieChart: {
         data: {
           labels: [],
@@ -383,9 +388,7 @@ export default {
         }
       },
       seq2: 0,
-      mapData: {
-
-      }
+      mapData: {}
     };
   }
 };

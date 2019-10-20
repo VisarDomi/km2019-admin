@@ -16,6 +16,7 @@ export const SET_HOME_IMAGE = "setHomeImage";
 export const SET_BLOG_IMAGE = "setBlogImage";
 
 export const SET_VOTES = "setVotes";
+export const SET_TOTAL_VOTES = "setTotalVotes";
 
 export const SET_BLOGS = "setBlogs";
 export const SET_BLOG = "setBlog";
