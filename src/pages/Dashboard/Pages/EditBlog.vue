@@ -319,6 +319,7 @@ export default {
         isMainHome: this.isMainHome,
         containsVideo: this.containsVideo,
         videoLink: this.videoLink,
+        filterImg: this.filterImg,
         img: blogImg
       };
 
