@@ -65,13 +65,13 @@
 </template>
 
 <script>
-import { LIST_BLOGS } from "@/store/actions.type";
+import { LIST_BLOG } from "@/store/actions.type";
 import { mapGetters } from "vuex";
 
 import { ProductCard } from "@/components";
 
 export default {
-  name: "Blog",
+  name: "Blogs",
   components: {
     ProductCard
   },
@@ -98,7 +98,7 @@ export default {
         TableName,
         Limit
       };
-      await this.$store.dispatch(LIST_BLOGS, params);
+      await this.$store.dispatch(LIST_BLOG, params);
 
       for (let blog of this.getBlogs) {
         this.blogs.push(blog);

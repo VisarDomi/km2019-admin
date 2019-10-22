@@ -1,9 +1,9 @@
 import { ApiService } from "../../services/api";
-import { LIST_BLOGS, GET_BLOG } from "../../actions.type";
+import { LIST_BLOG, GET_BLOG } from "../../actions.type";
 import { SET_BLOGS, SET_BLOG } from "../../mutations.type";
 
 export const actions = {
-  async [LIST_BLOGS](context, payload) {
+  async [LIST_BLOG](context, payload) {
     const { data } = await ApiService.get(payload);
     if ("Items" in data) {
       // // console.log("Artist list (data.Items of the response)", data.Items);

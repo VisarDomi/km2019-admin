@@ -101,28 +101,6 @@
               </div>
 
               <div class="md-layout">
-                <div class="md-layout md-layout-item md-size-50" style="margin-top:30px;">
-                  <label
-                    class="md-layout-item md-size-15 md-form-label"
-                  >Home Display Image (color scaled)</label>
-                  <div class="md-layout-item">
-                    <md-field>
-                      <input
-                        type="file"
-                        ref="imgHome"
-                        :id="'imgHome'"
-                        accept="image/*"
-                        @change="handleMainUpload()"
-                      />
-                    </md-field>
-                    <md-button class="md-success" @click="updateHomeDisplay()">Update Home Display</md-button>
-                  </div>
-
-                  <label class="md-layout-item md-size-15 md-form-label">Home Display Image</label>
-                  <div class="md-layout-item">
-                    <img :src="this.filterImg" alt style="width:20rem;" :key="this.filterImg" />
-                  </div>
-                </div>
 
                 <div class="md-layout md-layout-item md-size-50" style="margin-top:30px;">
                   <label class="md-layout-item md-size-15 md-form-label">Blog Display Image</label>

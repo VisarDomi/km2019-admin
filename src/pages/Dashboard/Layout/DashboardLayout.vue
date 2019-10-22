@@ -19,7 +19,7 @@
         >
         </sidebar-item>
         <sidebar-item
-          :link="{ name: 'Blog', icon: 'library_books', path: '/blog' }"
+          :link="{ name: 'Blogs', icon: 'library_books', path: '/blogs' }"
         >
         </sidebar-item>
         <sidebar-item

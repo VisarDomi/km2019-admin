@@ -305,7 +305,7 @@ export default {
 
 
 
-      this.$router.push({ name: "Blog" });
+      this.$router.push({ name: "Blogs" });
 
     }
 

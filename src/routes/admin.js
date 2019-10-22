@@ -2,7 +2,7 @@ import DashboardLayout from "@/pages/Dashboard/Layout/DashboardLayout.vue";
 
 // Dashboard pages
 import Dashboard from "@/pages/Dashboard/Dashboard.vue";
-import Blog from "@/pages/Dashboard/Pages/Blog.vue";
+import Blogs from "@/pages/Dashboard/Pages/Blogs.vue";
 import CreateBlog from "@/pages/Dashboard/Pages/CreateBlog.vue";
 import EditBlog from "@/pages/Dashboard/Pages/EditBlog.vue";
 import EditArtist from "@/pages/Dashboard/Pages/EditArtist.vue";
@@ -26,10 +26,10 @@ export const admin = {
     },
 
     {
-      path: "blog",
-      name: "Blog",
-      components: { default: Blog },
-      meta: setMeta("Blog")
+      path: "blogs",
+      name: "Blogs",
+      components: { default: Blogs },
+      meta: setMeta("Blogs")
     },
     {
       path: "createblog",
