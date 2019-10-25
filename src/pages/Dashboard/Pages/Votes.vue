@@ -1,11 +1,5 @@
 <template>
   <div>
-    <!-- <div v-for="artist of this.getArtists">
-      <button @click="fetchVotes(artist.id)">Get Votes of {{artist.name}}</button>
-    </div>
-    <br />
-    <div>Votes are {{votes}}</div>
-    <br />-->
 
     <div class="md-layout">
       <div class="md-layout-item">
@@ -132,70 +126,30 @@ export default {
   methods: {
     customSort(value) {
       return value.sort((a, b) => {
-
         const sortBy = this.currentSort;
         if (this.currentSortOrder === "desc") {
           // return a[sortBy].localeCompare(b[sortBy]);
-          console.log("->",a[sortBy] > b[sortBy])
-          console.log("a->",a[sortBy] )
-          console.log("b->",b[sortBy])
-          if(a[sortBy] > b[sortBy]){
+          console.log("->", a[sortBy] > b[sortBy]);
+          console.log("a->", a[sortBy]);
+          console.log("b->", b[sortBy]);
+          if (a[sortBy] > b[sortBy]) {
             return -1;
-          } else if (a[sortBy] < b[sortBy]){
+          } else if (a[sortBy] < b[sortBy]) {
             return 1;
           } else {
             return 0;
           }
-
-          
         }
 
-
-        if(a[sortBy] > b[sortBy]){
-            return 1;
-          } else if (a[sortBy] < b[sortBy]){
-            return -1;
-          } else {
-            return 0;
-          }
-
+        if (a[sortBy] > b[sortBy]) {
+          return 1;
+        } else if (a[sortBy] < b[sortBy]) {
+          return -1;
+        } else {
+          return 0;
+        }
       });
     }
-    // async fetchVotes(artistId) {
-    //   console.log("artistId", artistId);
-    //   const TableName = "KM2019-Vote";
-    //   const params = {
-    //     TableName,
-    //     artistId
-    //   };
-    //   await this.$store.dispatch(LIST_VOTE, params);
-
-    //   this.votes = this.getVotes.votes;
-    //   console.log("this.votes: ", this.votes)
-
-    //   let list_votes = [];
-    //   let list_ids = [];
-    //   for (let vote of this.getVotes) {
-    //     console.log("vote in for loop: ", vote)
-    //     list_votes.push(vote.votes);
-    //     list_ids.push(vote.artistId);
-    //   }
-    //   this.fetchArtistNames(list_votes, list_ids);
-    // },
-    // async fetchArtistNames(votes, ids) {
-    //   let i = 0;
-    //   for (let singleId of ids) {
-    //     const TableName = "KM2019-Artist";
-    //     const id = singleId;
-    //     const params = {
-    //       TableName,
-    //       id
-    //     };
-    //     await this.$store.dispatch(GET_ARTIST, params);
-    //     this.artists.push({ name: this.getArtist.name, votes: votes[i] });
-    //     i = i + 1;
-    //   }
-    // }
   },
   computed: {
     /***

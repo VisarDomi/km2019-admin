@@ -7,19 +7,13 @@
           class="md-layout-item md-size-50 md-medium-size-50 md-small-size-100 ml-auto"
           slot="content-left"
         >
-          <div
-            class="info info-horizontal"
-            v-for="item in contentLeft"
-            :key="item.title"
-          >
+          <div class="info info-horizontal" v-for="item in contentLeft" :key="item.title">
             <div :class="`icon ${item.colorIcon}`">
               <md-icon>{{ item.icon }}</md-icon>
             </div>
             <div class="description">
               <h4 class="info-title">{{ item.title }}</h4>
-              <p class="description">
-                {{ item.description }}
-              </p>
+              <p class="description">{{ item.description }}</p>
             </div>
           </div>
         </div>
@@ -39,22 +33,17 @@
             </md-button>
             <h4 class="mt-3">or be classical</h4>
           </div>
-          <md-field
-            class="md-form-group"
-            v-for="item in inputs"
-            :key="item.name"
-          >
+          <md-field class="md-form-group" v-for="item in inputs" :key="item.name">
             <md-icon>{{ item.icon }}</md-icon>
             <label>{{ item.name }}</label>
             <md-input :v-model="item.nameAttr" :type="item.type"></md-input>
           </md-field>
-          <md-checkbox v-model="boolean"
-            >I agree to the <a>terms and conditions</a>.</md-checkbox
-          >
+          <md-checkbox v-model="boolean">
+            I agree to the
+            <a>terms and conditions</a>.
+          </md-checkbox>
           <div class="button-container">
-            <md-button href class="md-success md-round mt-4" slot="footer"
-              >Get Started</md-button
-            >
+            <md-button href class="md-success md-round mt-4" slot="footer">Get Started</md-button>
           </div>
         </div>
       </signup-card>

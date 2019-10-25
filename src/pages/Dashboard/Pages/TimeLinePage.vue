@@ -55,15 +55,22 @@
               >
                 <md-icon>build</md-icon>
               </md-button>
-              <ul
-                class="dropdown-menu"
-                :class="{ 'dropdown-menu-right': !responsive }"
-              >
-                <li><a href="#">Mike John responded to your email</a></li>
-                <li><a href="#">You have 5 new tasks</a></li>
-                <li><a href="#">You're now friend with Andrew</a></li>
-                <li><a href="#">Another Notification</a></li>
-                <li><a href="#">Another One</a></li>
+              <ul class="dropdown-menu" :class="{ 'dropdown-menu-right': !responsive }">
+                <li>
+                  <a href="#">Mike John responded to your email</a>
+                </li>
+                <li>
+                  <a href="#">You have 5 new tasks</a>
+                </li>
+                <li>
+                  <a href="#">You're now friend with Andrew</a>
+                </li>
+                <li>
+                  <a href="#">Another Notification</a>
+                </li>
+                <li>
+                  <a href="#">Another One</a>
+                </li>
               </ul>
             </drop-down>
           </div>

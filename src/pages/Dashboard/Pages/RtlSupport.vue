@@ -1,38 +1,38 @@
 <template>
   <div class="md-layout">
-    <div
-      class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
-    >
+    <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50">
       <md-card>
         <md-card-header class="md-card-header-text md-card-header-warning">
           <div class="card-text">
             <h4 class="title">لتكاليف يبق</h4>
-            <p class="category">
-              بالإنزال وفي. خيار ومضى العمليات تم ذلك, تم معقل مرمى
-            </p>
+            <p class="category">بالإنزال وفي. خيار ومضى العمليات تم ذلك, تم معقل مرمى</p>
           </div>
         </md-card-header>
         <md-card-content>
           <md-table v-model="users" table-header-color="orange">
             <md-table-row slot="md-table-row" slot-scope="{ item }">
               <md-table-cell md-label="وتم">{{ item.id }}</md-table-cell>
-              <md-table-cell md-label="لأمريكية هذا">{{
+              <md-table-cell md-label="لأمريكية هذا">
+                {{
                 item.name
-              }}</md-table-cell>
-              <md-table-cell md-label="شاسعالأمريكية">{{
+                }}
+              </md-table-cell>
+              <md-table-cell md-label="شاسعالأمريكية">
+                {{
                 item.salary
-              }}</md-table-cell>
-              <md-table-cell md-label="الأمريكية">{{
+                }}
+              </md-table-cell>
+              <md-table-cell md-label="الأمريكية">
+                {{
                 item.country
-              }}</md-table-cell>
+                }}
+              </md-table-cell>
             </md-table-row>
           </md-table>
         </md-card-content>
       </md-card>
     </div>
-    <div
-      class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
-    >
+    <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50">
       <nav-tabs-card>
         <template slot="content">
           <span class="md-nav-tabs-title">منتصف:</span>
@@ -109,21 +109,18 @@
         </template>
       </nav-tabs-card>
     </div>
-    <div
-      class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
-    >
+    <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50">
       <div class="md-layout">
         <div class="md-layout-item">
           <pricing-card icon-color="icon-success">
             <h6 slot="category" class="category">جيوب سليمان، الإنزال</h6>
             <md-icon slot="icon">home</md-icon>
             <h3 slot="title" class="title">29$</h3>
-            <p slot="description" class="card-description">
-              الأجل المتساقطة، من. عرض بسبب وأكثرها الاندونيسية بـ.
-            </p>
-            <md-button slot="footer" class="md-success md-round"
-              >حاملات فعل</md-button
-            >
+            <p
+              slot="description"
+              class="card-description"
+            >الأجل المتساقطة، من. عرض بسبب وأكثرها الاندونيسية بـ.</p>
+            <md-button slot="footer" class="md-success md-round">حاملات فعل</md-button>
           </pricing-card>
         </div>
         <div class="md-layout-item">
@@ -131,19 +128,16 @@
             <h6 slot="category" class="category">المتحدة لتقليعة</h6>
             <md-icon slot="icon">weekend</md-icon>
             <h3 slot="title" class="title black-color">قائمة</h3>
-            <p slot="description" class="card-description">
-              الأجل المتساقطة، من. عرض بسبب وأكثرها الاندونيسية بـ.
-            </p>
-            <md-button slot="footer" class="md-white md-round"
-              >حاملات فعل</md-button
-            >
+            <p
+              slot="description"
+              class="card-description"
+            >الأجل المتساقطة، من. عرض بسبب وأكثرها الاندونيسية بـ.</p>
+            <md-button slot="footer" class="md-white md-round">حاملات فعل</md-button>
           </pricing-card>
         </div>
         <div class="md-layout-item md-size-90">
           <testimonial-card>
-            <template slot="header-icon"
-              >format_quote</template
-            >
+            <template slot="header-icon">format_quote</template>
             <template slot="content">
               <h5 class="description">
                 بعد و وسوء الأحمر, دون عقبت الهادي أم, قد حول قادة حكومة يتعلّق.
@@ -165,9 +159,7 @@
         </div>
       </div>
     </div>
-    <div
-      class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
-    >
+    <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50">
       <time-line plain type="simple">
         <time-line-item inverted badge-type="danger" badge-icon="card_travel">
           <span slot="header" class="badge badge-danger">جهة أي</span>
@@ -217,10 +209,18 @@
                 <md-icon>build</md-icon>
               </md-button>
               <ul class="dropdown-menu dropdown-menu-right">
-                <li><a href="#">ان</a></li>
-                <li><a href="#">إجلاء لفرنسا</a></li>
-                <li><a href="#">أواخر الأرض بل</a></li>
-                <li><a href="#">عل اليها</a></li>
+                <li>
+                  <a href="#">ان</a>
+                </li>
+                <li>
+                  <a href="#">إجلاء لفرنسا</a>
+                </li>
+                <li>
+                  <a href="#">أواخر الأرض بل</a>
+                </li>
+                <li>
+                  <a href="#">عل اليها</a>
+                </li>
               </ul>
             </drop-down>
           </div>

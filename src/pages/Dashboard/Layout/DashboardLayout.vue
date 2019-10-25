@@ -1,10 +1,7 @@
 <template>
-  <div
-    class="wrapper"
-    :class="[
+  <div class="wrapper" :class="[
       { 'nav-open': $sidebar.showSidebar }
-    ]"
-  >
+    ]">
     <notifications></notifications>
     <side-bar
       :active-color="sidebarBackground"
@@ -14,32 +11,18 @@
       <user-menu></user-menu>
       <mobile-menu></mobile-menu>
       <template slot="links">
-        <sidebar-item
-          :link="{ name: 'Dashboard', icon: 'dashboard', path: '/dashboard' }"
-        >
-        </sidebar-item>
-        <sidebar-item
-          :link="{ name: 'Blogs', icon: 'library_books', path: '/blogs' }"
-        >
-        </sidebar-item>
-        <sidebar-item
-          :link="{ name: 'Artists', icon: 'mic', path: '/artists' }"
-        >
-        </sidebar-item>
- 
-        <sidebar-item
-          :link="{ name: 'Votes', icon: 'poll', path: '/votes' }"
-        >
-        </sidebar-item>           
+        <sidebar-item :link="{ name: 'Dashboard', icon: 'dashboard', path: '/dashboard' }"></sidebar-item>
+        <sidebar-item :link="{ name: 'Blogs', icon: 'library_books', path: '/blogs' }"></sidebar-item>
+        <sidebar-item :link="{ name: 'Artists', icon: 'mic', path: '/artists' }"></sidebar-item>
+        <sidebar-item :link="{ name: 'Jurys', icon: 'group_work', path: '/jurys' }"></sidebar-item>
+
+        <sidebar-item :link="{ name: 'Votes', icon: 'poll', path: '/votes' }"></sidebar-item>
       </template>
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>
 
-      <div
-        :class="{ content: !$route.meta.hideContent }"
-        @click="toggleSidebar"
-      >
+      <div :class="{ content: !$route.meta.hideContent }" @click="toggleSidebar">
         <zoom-center-transition :duration="200" mode="out-in">
           <!-- your content here -->
           <router-view></router-view>

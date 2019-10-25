@@ -1,24 +1,30 @@
 <template>
   <div class="content">
-
-        <div class="md-layout">
+    <div class="md-layout">
       <div class="md-layout-item" style="margin-bottom:5rem;">
         <md-button class="md-success" @click="addArtist()">Add new artist...</md-button>
       </div>
     </div>
 
-
     <div class="md-layout">
-
       <div class="md-layout-item md-medium-size-100 md-size-20" v-for="artist of this.artists">
-        <artist-card  button-color="success" :artistId="artist.id" :video="artist.video" :cardUserImage="artist.img" :name="artist.name" :home="artist.isCurrentWeek" :week="artist.week" :descriptionEng="artist.bioEng.substring(0,80)" :description="artist.bio.substring(0, 80)"> </artist-card>
+        <artist-card
+          button-color="success"
+          :artistId="artist.id"
+          :video="artist.video"
+          :cardUserImage="artist.img"
+          :name="artist.name"
+          :home="artist.isCurrentWeek"
+          :week="artist.week"
+          :descriptionEng="artist.bioEng.substring(0,80)"
+          :description="artist.bio.substring(0, 80)"
+        ></artist-card>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
 import { ArtistCard } from "@/pages";
 import { LIST_ARTIST } from "@/store/actions.type";
 import { mapGetters } from "vuex";
@@ -32,12 +38,9 @@ export default {
       artists: []
     };
   },
-  methods:{
-    goToArtist(artist) {
-      
-
-    },
-    addArtist(){
+  methods: {
+    goToArtist(artist) {},
+    addArtist() {
       this.$router.push({ name: "CreateArtist" });
     },
     async fetchArtists() {
@@ -56,7 +59,7 @@ export default {
     }
   },
   async mounted() {
-    await this.fetchArtists()
+    await this.fetchArtists();
   },
   computed: {
     ...mapGetters(["getArtists"])

@@ -101,7 +101,6 @@
               </div>
 
               <div class="md-layout">
-
                 <div class="md-layout md-layout-item md-size-50" style="margin-top:30px;">
                   <label class="md-layout-item md-size-15 md-form-label">Blog Display Image</label>
                   <div class="md-layout-item">

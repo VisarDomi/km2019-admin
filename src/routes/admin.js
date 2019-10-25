@@ -8,6 +8,9 @@ import EditBlog from "@/pages/Dashboard/Pages/EditBlog.vue";
 import EditArtist from "@/pages/Dashboard/Pages/EditArtist.vue";
 import Artists from "@/pages/Dashboard/Pages/Artists.vue";
 import CreateArtist from "@/pages/Dashboard/Pages/CreateArtist.vue";
+import EditJury from "@/pages/Dashboard/Pages/EditJury.vue";
+import Jurys from "@/pages/Dashboard/Pages/Jurys.vue";
+import CreateJury from "@/pages/Dashboard/Pages/CreateJury.vue";
 import Submissions from "@/pages/Dashboard/Pages/Submissions.vue";
 import Votes from "@/pages/Dashboard/Pages/Votes.vue";
 
@@ -17,7 +20,6 @@ export const admin = {
   path: "/",
   component: DashboardLayout,
   children: [
-
     {
       path: "dashboard",
       name: "Dashboard",
@@ -57,9 +59,27 @@ export const admin = {
     },
     {
       path: "createartist",
-      name: "CreateArtist",      
+      name: "CreateArtist",
       components: { default: CreateArtist },
       meta: setMeta("CreateArtist")
+    },
+    {
+      path: "jurys",
+      name: "Jurys",
+      components: { default: Jurys },
+      meta: setMeta("Jurys")
+    },
+    {
+      path: "jury/:id",
+      name: "EditJury",
+      components: { default: EditJury },
+      meta: setMeta("Jury Detail")
+    },
+    {
+      path: "createjury",
+      name: "CreateJury",
+      components: { default: CreateJury },
+      meta: setMeta("CreateJury")
     },
 
     {
