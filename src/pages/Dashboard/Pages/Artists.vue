@@ -18,6 +18,7 @@
           :week="artist.week"
           :descriptionEng="artist.bioEng.substring(0,80)"
           :description="artist.bio.substring(0, 80)"
+          :ordering="artist.ordering"
         ></artist-card>
       </div>
     </div>

@@ -18,6 +18,7 @@
       <br />
       <!-- <md-checkbox v-model="home" >Show on home screen</md-checkbox> -->
       <h4 v-if="home"><b> Shown on homescreen</b></h4>
+      <h4>Order - {{ordering}}</h4>
     </md-card-content>
   </md-card>
 </template>
@@ -36,6 +37,7 @@ export default {
     name: "",
     description: "",
     descriptionEng: "",
+    ordering: "",
     home: "",
     week: "",
     video: "",
