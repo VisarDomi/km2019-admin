@@ -10,7 +10,9 @@ export function setMeta(title) {
             property: "og:description",
             content: `Kenga Magjike Admin - ${title}`
           }
-        ]
+        ],
+        requiresAuth: true
+
       }
   return meta
 }

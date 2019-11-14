@@ -13,10 +13,13 @@ import Jurys from "@/pages/Dashboard/Pages/Jurys.vue";
 import CreateJury from "@/pages/Dashboard/Pages/CreateJury.vue";
 import Submissions from "@/pages/Dashboard/Pages/Submissions.vue";
 import Votes from "@/pages/Dashboard/Pages/Votes.vue";
+import Login from "@/pages/Dashboard/Pages/Login.vue";
 
 import { setMeta } from "./common";
 
 export const admin = {
+
+
   path: "/",
   component: DashboardLayout,
   children: [
@@ -94,6 +97,17 @@ export const admin = {
       name: "Votes",
       components: { default: Votes },
       meta: setMeta("Votes")
-    }
-  ]
+    },
+    {
+      path: "login",
+      name: "Login",
+      components: { default: Login },
+    },
+  ],
+  // meta: {
+  //   requiresAuth: true
+  // }
+
+
 };
+

@@ -24,3 +24,9 @@ export const SET_TOTAL_VOTES = "setTotalVotes";
 
 export const SET_BLOGS = "setBlogs";
 export const SET_BLOG = "setBlog";
+
+
+export const PURGE_AUTH = "logOut";
+export const SET_AUTH = "setUser";
+
+export const SET_ERROR = "setError";

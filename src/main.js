@@ -6,6 +6,7 @@ import { ApiService } from "./store/services/api";
 import { yearFormat, hourFormat } from "./common/date.filter";
 import ErrorFilter from "./common/error.filter";
 
+import JwtService from "@/common/jwt.service";
 // Plugins
 import App from "./App.vue";
 import Chartist from "chartist";
@@ -46,6 +47,23 @@ const router = new VueRouter({
   scrollBehavior() {
     return {x: 0, y: 0}
 }
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    console.log("Trying to access page: ", to);
+    if (JwtService.getToken() == null) {
+      console.log("token null")
+      next({
+        path: "/login",
+        params: { nextUrl: to.fullPath }
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
 });
 
 // global library setup

@@ -6,6 +6,7 @@ import jury from "./modules/jury";
 import vote from "./modules/vote";
 import album from "./modules/album";
 import blog from "./modules/blog";
+import auth from "./modules/auth/auth.module";
 import { ApiService } from "./services/api";
 import { PUT, DELETE } from "./actions.type";
 
@@ -13,6 +14,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
+    auth,
     loading,
     artist,
     jury,
