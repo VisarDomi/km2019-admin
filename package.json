@@ -21,7 +21,7 @@
     "google-maps": "3.3.0",
     "html2pdf.js": "^0.9.1",
     "jquery": "^3.4.1",
-    "jspdf-autotable": "^3.2.10",
+    "jspdf-autotable": "^3.2.11",
     "jvectormap-next": "3.0.0",
     "moment": "2.24.0",
     "nouislider": "13.1.0",

@@ -21,58 +21,64 @@
         v-for="blog in this.blogs"
         :key="blog.id"
       >
-        <product-card header-animation="true">
-          <img
-            class="img"
-            slot="imageHeader"
-            :src="blog.img"
-            style="height: 20rem;
-    object-fit: cover;"
-          />
-          <md-icon slot="fixed-button">build</md-icon>
-          <template slot="first-button">
-            <md-icon>art_track</md-icon>
-            <md-tooltip md-direction="bottom">View</md-tooltip>
-          </template>
-          <template slot="second-button">
-            <md-icon>edit</md-icon>
-            <md-tooltip md-direction="bottom">Edit</md-tooltip>
-          </template>
-          <template slot="third-button">
-            <md-icon>close</md-icon>
-            <md-tooltip md-direction="bottom">Remove</md-tooltip>
-          </template>
-          <h4 slot="title" class="title">
-            <a href="#" @click="goToBlog(blog)">{{blog.title}}</a>
-            <br />
-            <a href="#" @click="goToBlog(blog)">{{blog.titleEn}}</a>
-          </h4>
-          <div slot="description" class="card-description">
-            {{blog.body.substring(0, 80)}}
-            <br />
-            {{blog.bodyEn.substring(0, 80)}}
-          </div>
-          <template slot="footer">
-            <div class="price">
-              <h4>{{blog.date}}</h4>
+          <product-card header-animation="true">
+            <img
+              class="img"
+              slot="imageHeader"
+              :src="blog.img"
+              style="height: 20rem; object-fit: cover;"
+            />
+            <md-icon slot="fixed-button">build</md-icon>
+            <!-- <template slot="first-button">
+              <div @click="goToBlog(blog)">
+                <md-icon>art_track</md-icon>
+                <md-tooltip md-direction="bottom">View</md-tooltip>
+              </div>
+            </template>-->
+            <template slot="second-button">
+              <div @click="goToBlog(blog)">
+                <md-icon>edit</md-icon>
+                <md-tooltip md-direction="bottom">Edit</md-tooltip>
+              </div>
+            </template>
+            <template slot="third-button">
+              <div @click="askDeleteBlog(blog)">
+                <md-icon>close</md-icon>
+                <md-tooltip md-direction="bottom">Remove</md-tooltip>
+              </div>
+            </template>
+            <h4 slot="title" class="title">
+              <a href="#" @click="goToBlog(blog)">{{blog.title}}</a>
+              <br />
+              <a href="#" @click="goToBlog(blog)">{{blog.titleEn}}</a>
+            </h4>
+            <div slot="description" class="card-description">
+              {{blog.body.substring(0, 80)}}
+              <br />
+              {{blog.bodyEn.substring(0, 80)}}
             </div>
-            <div class="price">
-              <h4>{{blog.ordering}}</h4>
-            </div>
-            <div class="stats">
-              <h4 class="category" v-if="blog.isMainHome">
-                <strong>Visible on home page</strong>
-              </h4>
-            </div>
-          </template>
-        </product-card>
+            <template slot="footer">
+              <div class="price">
+                <h4>{{blog.date}}</h4>
+              </div>
+              <div class="price">
+                <h4>{{blog.ordering}}</h4>
+              </div>
+              <div class="stats">
+                <h4 class="category" v-if="blog.isMainHome">
+                  <strong>Visible on home page</strong>
+                </h4>
+              </div>
+            </template>
+          </product-card>
+        
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { LIST_BLOG } from "@/store/actions.type";
+import { LIST_BLOG, DELETE } from "@/store/actions.type";
 import { mapGetters } from "vuex";
 
 import { ProductCard } from "@/components";
@@ -84,10 +90,29 @@ export default {
   },
   data() {
     return {
-      blogs: []
+      blogs: [],
+      isDeleting: false
     };
   },
   methods: {
+    askDeleteBlog(blog) {
+      let isSure = confirm("Are you sure you want to delete this blog?")
+      if (isSure) {
+        // delete blog
+        this.deleteBlog(blog)
+      }
+    },
+    async deleteBlog(blog) {
+      this.isDeleting = true;
+      const TableName = "KM2019-Blog";
+      const payload = {
+        TableName,
+        id: blog.id
+      };
+      await this.$store.dispatch(DELETE, payload);
+      this.isDeleting = false;
+      await this.fetchBlogs();
+    },
     addBlog() {
       this.$router.push({ name: "CreateBlog" });
     },
@@ -98,6 +123,7 @@ export default {
       });
     },
     async fetchBlogs() {
+      this.blogs = []
       const TableName = "KM2019-Blog";
       const Limit = "100";
       const params = {
