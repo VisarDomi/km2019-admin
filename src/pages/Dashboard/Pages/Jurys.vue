@@ -42,6 +42,7 @@ export default {
       this.$router.push({ name: "CreateJury" });
     },
     async fetchJurys() {
+      this.jurys = []
       const TableName = "KM2019-Jury";
       const Limit = "100";
       const params = {

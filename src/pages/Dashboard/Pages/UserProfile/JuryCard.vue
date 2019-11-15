@@ -15,7 +15,7 @@
         :class="getColorButton(buttonColor)"
         @click="editJury(juryId)"
       >Edit</md-button>
-      <md-button class="md-round md-danger">Delete</md-button>
+      <md-button class="md-round md-danger" @click="askDeleteJury(juryId)">Delete</md-button>
       <br />
       <!-- <md-checkbox v-model="home" >Show on home screen</md-checkbox> -->
       <!-- <h4 v-if="home">
@@ -25,6 +25,8 @@
   </md-card>
 </template>
 <script>
+import {DELETE} from "@/store/actions.type"
+
 export default {
   name: "jury-card",
   props: {
@@ -44,10 +46,31 @@ export default {
   },
   data() {
     return {
-      shownHome: []
+      shownHome: [],
+      isDeleting: false
     };
   },
   methods: {
+    askDeleteJury(juryId) {
+      let isSure = confirm("Are you sure you want to delete this jury?")
+      if (isSure) {
+        // delete jury
+        this.deleteJury(juryId)
+      }
+    },
+    async deleteJury(juryId) {
+      this.isDeleting = true;
+      const TableName = "KM2019-Jury";
+      const payload = {
+        TableName,
+        id: juryId
+      };
+      await this.$store.dispatch(DELETE, payload);
+      this.isDeleting = false;
+      // ?now is time to refresh
+      document.location.reload() // easiest way
+      // await this.fetchJurys(); // without refresh, but needs js kung-fu
+    },
     getColorButton: function(buttonColor) {
       return "md-" + buttonColor + "";
     },

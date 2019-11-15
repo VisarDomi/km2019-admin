@@ -45,6 +45,7 @@ export default {
       this.$router.push({ name: "CreateArtist" });
     },
     async fetchArtists() {
+      this.artists = []
       const TableName = "KM2019-Artist";
       const Limit = "100";
       const params = {

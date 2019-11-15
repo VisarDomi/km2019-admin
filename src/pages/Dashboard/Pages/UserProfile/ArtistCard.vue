@@ -14,7 +14,7 @@
         <a :href="video">{{video}}</a>
       </p>
       <md-button class="md-round" :class="getColorButton(buttonColor)" @click="editArtist(artistId)">Edit</md-button>
-      <md-button class="md-round md-danger">Delete</md-button>
+      <md-button class="md-round md-danger" @click="askDeleteArtist(artistId)">Delete</md-button>
       <br />
       <!-- <md-checkbox v-model="home" >Show on home screen</md-checkbox> -->
       <h4 v-if="home"><b> Shown on homescreen</b></h4>
@@ -23,6 +23,8 @@
   </md-card>
 </template>
 <script>
+import {DELETE} from "@/store/actions.type"
+
 export default {
   name: "artist-card",
   props: {
@@ -45,10 +47,31 @@ export default {
   },
   data() {
     return {
-      shownHome: []
+      shownHome: [],
+      isDeleting: false
     };
   },
   methods: {
+    askDeleteArtist(artistId) {
+      let isSure = confirm("Are you sure you want to delete this artist?")
+      if (isSure) {
+        // delete artist
+        this.deleteArtist(artistId)
+      }
+    },
+    async deleteArtist(artistId) {
+      this.isDeleting = true;
+      const TableName = "KM2019-Artist";
+      const payload = {
+        TableName,
+        id: artistId
+      };
+      await this.$store.dispatch(DELETE, payload);
+      this.isDeleting = false;
+      // ?now is time to refresh
+      document.location.reload() // easiest way
+      // await this.fetchArtists(); // without refresh, but needs js kung-fu
+    },
     getColorButton: function(buttonColor) {
       return "md-" + buttonColor + "";
     },
