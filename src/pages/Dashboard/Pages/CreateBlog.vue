@@ -100,6 +100,7 @@
                 </div>
               </div>
 
+
               <div class="md-layout">
                 <div class="md-layout md-layout-item md-size-50" style="margin-top:30px;">
                   <label class="md-layout-item md-size-15 md-form-label">Blog Display Image</label>
@@ -123,6 +124,53 @@
                 </div>
               </div>
 
+              <div class="md-layout">
+                <div class="md-layout md-layout-item md-size-50" style="margin-top:30px;">
+                  <label class="md-layout-item md-size-15 md-form-label">Blog Display Image2</label>
+                  <div class="md-layout-item">
+                    <md-field>
+                      <input
+                        type="file"
+                        ref="imgBlog2"
+                        :id="'imgBlog2'"
+                        accept="image/*"
+                        @change="handleBlogUpload2()"
+                      />
+                    </md-field>
+                    <md-button class="md-success" @click="updateBlogDisplay2()">Update Blog Display2</md-button>
+                  </div>
+
+                  <label class="md-layout-item md-size-15 md-form-label">Blog Display Image2</label>
+                  <div class="md-layout-item">
+                    <img :src="this.img2" alt style="width:20rem;" :key="this.img2" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="md-layout">
+                <div class="md-layout md-layout-item md-size-50" style="margin-top:30px;">
+                  <label class="md-layout-item md-size-15 md-form-label">Blog Display Image3</label>
+                  <div class="md-layout-item">
+                    <md-field>
+                      <input
+                        type="file"
+                        ref="imgBlog3"
+                        :id="'imgBlog3'"
+                        accept="image/*"
+                        @change="handleBlogUpload3()"
+                      />
+                    </md-field>
+                    <md-button class="md-success" @click="updateBlogDisplay3()">Update Blog Display3</md-button>
+                  </div>
+
+                  <label class="md-layout-item md-size-15 md-form-label">Blog Display Image3</label>
+                  <div class="md-layout-item">
+                    <img :src="this.img3" alt style="width:20rem;" :key="this.img3" />
+                  </div>
+                </div>
+              </div>
+
+
               <div class="md-layout" style="margin-top:50px;">
                 <div class="md-layout-item mx-auto md-size-30">
                   <md-button class="md-success" type="submit">Save Blog</md-button>
@@ -142,8 +190,9 @@ import { s3, albumBucketName } from "@/common/constants";
 import {
   START_LOADING,
   STOP_LOADING,
-  SET_HOME_IMAGE,
-  SET_BLOG_IMAGE
+  SET_BLOG_IMAGE,
+  SET_BLOG_IMAGE2,
+  SET_BLOG_IMAGE3
 } from "@/store/mutations.type";
 
 export default {
@@ -157,6 +206,8 @@ export default {
       body: "",
       bodyEn: "",
       img: "",
+      img2: "",
+      img3: "",
       ordering: "",
       isMainHome: false,
       containsVideo: false,
@@ -164,20 +215,22 @@ export default {
     };
   },
   methods: {
-    handleMainUpload() {
-      let vm = this;
-      this.$store.commit(SET_HOME_IMAGE, { vm });
-    },
     handleBlogUpload() {
       let vm = this;
       this.$store.commit(SET_BLOG_IMAGE, { vm });
     },
+    handleBlogUpload2() {
+      let vm = this;
+      this.$store.commit(SET_BLOG_IMAGE2, { vm });
+    },
+    handleBlogUpload3() {
+      let vm = this;
+      this.$store.commit(SET_BLOG_IMAGE3, { vm });
+    },
 
-    updateBlogDisplay() {
+    uploadImage(files, imgName) {
       let albumName = "Blogs";
       let albumPhotosKey = encodeURIComponent(albumName) + "//";
-
-      const files = this.$refs.imgBlog.files;
 
       if (files.length === 0) {
         return console.log("Please choose a file to upload first.");
@@ -206,46 +259,22 @@ export default {
           const href = "https://s3.eu-west-1.amazonaws.com/kengamagjike2019/";
           const photoKey = data.Key;
           const photoUrl = href + encodeURIComponent(photoKey);
-          vm.img = photoUrl;
+          eval(`vm.`+`${imgName}`+`=photoUrl`)
         }
       );
     },
-    updateHomeDisplay() {
-      let albumName = "Blogs";
-      let albumPhotosKey = encodeURIComponent(albumName) + "//";
 
-      const files = this.$refs.imgHome.files;
-
-      if (files.length === 0) {
-        return console.log("Please choose a file to upload first.");
-      }
-      const file = files[0];
-      const fileName = file.name;
-
-      const photoKey = albumPhotosKey + fileName;
-      let vm = this;
-      s3.upload(
-        {
-          Key: photoKey,
-          Body: file,
-          ACL: "public-read"
-        },
-        function(err, data) {
-          if (err) {
-            return console.log(
-              "There was an error uploading your photo: ",
-              err.message
-            );
-          }
-          console.log("Successfully uploaded photo.");
-          // vm.fetchAlbum();
-          const albumBucketName = "Blogs";
-          const href = "https://s3.eu-west-1.amazonaws.com/kengamagjike2019/";
-          const photoKey = data.Key;
-          const photoUrl = href + encodeURIComponent(photoKey);
-          vm.filterImg = photoUrl;
-        }
-      );
+    updateBlogDisplay() {
+      const files = this.$refs.imgBlog.files;
+      this.uploadImage(files, "img")
+    },
+    updateBlogDisplay2() {
+      const files = this.$refs.imgBlog2.files;
+      this.uploadImage(files, "img2")
+    },
+    updateBlogDisplay3() {
+      const files = this.$refs.imgBlog3.files;
+      this.uploadImage(files, "img3")
     },
 
     async onSubmit() {
@@ -261,6 +290,8 @@ export default {
         ordering: this.ordering,
         isMainHome: this.isMainHome,
         img: this.img,
+        img2: this.img2,
+        img3: this.img3,
         containsVideo: this.containsVideo,
         videoLink: this.videoLink
       };

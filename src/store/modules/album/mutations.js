@@ -1,4 +1,10 @@
-import { SET_ALBUMS, SET_ALBUM, SET_HOME_IMAGE, SET_BLOG_IMAGE } from "../../mutations.type";
+import {
+  SET_ALBUMS,
+  SET_ALBUM,
+  SET_BLOG_IMAGE,
+  SET_BLOG_IMAGE2,
+  SET_BLOG_IMAGE3
+} from "../../mutations.type";
 
 export const mutations = {
   [SET_ALBUMS](state, albums) {
@@ -7,10 +13,13 @@ export const mutations = {
   [SET_ALBUM](state, album) {
     state.album = album;
   },
-  [SET_HOME_IMAGE](state, { vm }) {
-    state.homeFiles = vm.$refs.imgHome.files;
-  },
   [SET_BLOG_IMAGE](state, { vm }) {
     state.blogFiles = vm.$refs.imgBlog.files;
   },
+  [SET_BLOG_IMAGE2](state, { vm }) {
+    state.blogFiles = vm.$refs.imgBlog.files;
+  },
+  [SET_BLOG_IMAGE3](state, { vm }) {
+    state.blogFiles = vm.$refs.imgBlog.files;
+  }
 };
